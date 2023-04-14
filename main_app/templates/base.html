@@ -4,19 +4,20 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/style.css%' }" />
     <title>{% block %} {% endblock %}</title>
   </head>
   <body>
-    <img src="https://i.imgur.com/BtLtitr.jpg" alt="">
-      <header class="navbar-fixed">
-        <nav>
-          <div class="nav-wrapper">
-            <ul>
-              <li><a href="{% url 'home' %}"> Home</a></li>
-              <li><a href="{% url '' %}">View Animals</a></li>
-            </ul>
-          </div>
-        </nav>
-      </header>
+    <img src="https://i.imgur.com/BtLtitr.jpg" alt="" id="banner" />
+    <header class="navbar-fixed">
+      <nav>
+        <div class="nav-wrapper">
+          <ul>
+            <li><a href="{% url 'home' %}"> Home</a></li>
+            <li><a href="{% url '' %}">View Animals</a></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
   </body>
 </html>
