@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -8,7 +9,11 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
     />
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/style.css' %}"
+    />
     <title>{% block title%} {% endblock title %}</title>
   </head>
   <body>
@@ -18,14 +23,12 @@
         <div class="nav-wrapper">
           <ul>
             <li><a href="{% url 'home' %}"> Home</a></li>
-            <li><a href="{% url 'animals_index' %}">View Animals</a></li>
+            <li><a href="{% url 'animals_index' %}"></a></li>
           </ul>
         </div>
       </nav>
     </header>
 
-    {% block content %} 
-    
-    {% endblock content %}
+    {% block content %} {% endblock content %}
   </body>
 </html>
