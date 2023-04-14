@@ -3,9 +3,13 @@ from django.shortcuts import render
 from .models import Animal
 
 
-# Define the home view
+# Main app 
 def home(request):
   return render(request,'home.html')
+
+def about(request):
+  return render(request, 'about.html')
+
 
 ##animal resource 
 
