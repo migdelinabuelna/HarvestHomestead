@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 
 {% block title %}
@@ -8,5 +9,22 @@
 
 {% block content %}
 <h1> ANIMAL LIST</h1>
+
+<body>
+<div class="col row">
+<div class="card-div">
+  <a href="{% url 'animals_index' %}">
+  <div class="card col s12 m6">
+    <div class="card-content">
+      <p>Animal: {{ animal.name }}</span>
+      <p>Breed: {{ animal.breed }}</p>
+      <p>Preferred Living Conditions: {{ animal.preferred_living_conditions }}</p>
+      <p>User: {{ animal.user }} </p>
+    </div>
+  </div>
+  </a>
+</div>
+</div>
+</body>
 {% endblock content %}
     
