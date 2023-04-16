@@ -16,16 +16,15 @@
     <nav id="navigation-bar">
         <div class="nav-wrapper">
           <ul>
-            <li><a href="{% url 'home' %}"> Home</a></li>
-            <li><a href="{% url 'animals_index' %}">All Animals</a></li>
-            <li>FEED</li>
+            <li><a href="{% url 'home' %}"> HOME </a></li>
+            <li><a href="{% url 'animals_index' %}">LIVESTOCK</a></li>
+            <li><a href="#"> FEED </a></li>
+            <li><a href="#"> EQUIPMENT </a></li>
           </ul>
         </div>
       </nav>
-    <main>
     {% block content %} 
     {% endblock content %}
-  </main>
   <footer>
       <p>footer</p>
   </footer>
