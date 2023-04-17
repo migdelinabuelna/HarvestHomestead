@@ -54,3 +54,7 @@ footer {
   flex-direction: row;
   padding-left: 20px;
 }
+
+.index-card {
+  margin: 0;
+}
