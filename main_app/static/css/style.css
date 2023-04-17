@@ -47,7 +47,7 @@ footer {
 
 .responsive-img {
   max-width: 100%;
-  height: auto;  
+  height: auto;
 }
 
 .homepage-container {
@@ -60,4 +60,3 @@ footer {
   flex-direction: column;
   justify-content: center;
 }
-
