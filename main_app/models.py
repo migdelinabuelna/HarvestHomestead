@@ -13,3 +13,9 @@ class Farm(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     farm_name = models.CharField(max_length=100)
     address = models.CharField(max_length=100, blank=True)
+
+class Comment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    comment = models.CharField(max_length = 150)
+    date = models.DateField(auto_now=True)
+    vote = models.IntegerField(default=0)
