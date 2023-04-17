@@ -20,6 +20,12 @@
             <li><a href="{% url 'animals_index' %}">LIVESTOCK</a></li>
             <li><a href="#"> FEED </a></li>
             <li><a href="#"> EQUIPMENT </a></li>
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'animals_create' %}">ADD AN ANIMAL</a></li>
+            <li><a href="{% url 'logout' %}">LOGOUT</a></li>
+            {% else %}
+            <li><a href="{% url 'login' %}">LOG IN</a></li>
+            {% endif %}
           </ul>
         </div>
       </nav>
