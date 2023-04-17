@@ -12,6 +12,8 @@
 
 <body>
     {% for a in animal %}
+    <div class="homepage-container">
+    <div class="source-page"> 
     <div class="col row">
         <div class="card-div">
           <a href="{% url 'animals_detail' a.id %}">
@@ -19,11 +21,13 @@
             <div class="card-content">
               <p>Animal: {{ a.name }}</span>
               <p>Breed: {{ a.breed }}</p>
-              <p>Preferred Living Conditions: {{ a.preferred_living_conditions }}</p>
+              <p>Ideal Habitat: {{ a.preferred_living_conditions }}</p>
             </div>
           </div>
           </a>
         </div>
+    </div>
+    </div>
     </div>
 {% endfor %}
 </body>
