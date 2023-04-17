@@ -19,3 +19,10 @@ class Comment(models.Model):
     comment = models.CharField(max_length = 150)
     date = models.DateField(auto_now=True)
     vote = models.IntegerField(default=0)
+
+class Photo(models.Model):
+    url = models.CharField(max_length=200)
+    animal = models.ForeignKey(Animal, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'Photo for animal_id {self.animal_id} @{self.url}'
