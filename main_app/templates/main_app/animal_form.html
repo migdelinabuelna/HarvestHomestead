@@ -3,7 +3,11 @@
 
 {% block content %}
 
-<h1>ADD AN ANIMAL!</h1>
+{% if object %}
+	<h1>Edit <span>{{object.name}}</span></h1>
+{% else %}
+	<h1>ADD AN ANIMAL!</h1>
+{% endif %}
 
 <form action="" method="POST">
 	{% csrf_token %}
