@@ -11,20 +11,28 @@
   </head>
   <body>
     <header class="banner">
-    <h5> HARVEST HOMESTEAD </h5>
+      <div>
+        <ul id="login">
+          {% if user.is_authenticated %}
+          <li><a href="{% url 'logout' %}">LOGOUT</a></li>
+          {% else %}
+         <li><a href="{% url 'login' %}">LOGIN</a></li>
+          <li><a href="#">SIGNUP</a></li>
+          {% endif %}
+        </ul><br>
+      </div>
+    <h5 class="banner-title"> HARVEST HOMESTEAD </h5>
   </header>
     <nav id="navigation-bar">
         <div class="nav-wrapper">
           <ul>
             <li><a href="{% url 'home' %}"> HOME </a></li>
+            <li><a href="{% url 'about' %}">ABOUT</a></li>
             <li><a href="{% url 'animals_index' %}">LIVESTOCK</a></li>
             <li><a href="#"> FEED </a></li>
             <li><a href="#"> EQUIPMENT </a></li>
             {% if user.is_authenticated %}
             <li><a href="{% url 'animals_create' %}">ADD LIVESTOCK</a></li>
-            <li><a href="{% url 'logout' %}">LOGOUT</a></li>
-            {% else %}
-            <li><a href="{% url 'login' %}">LOG IN</a></li>
             {% endif %}
           </ul>
         </div>

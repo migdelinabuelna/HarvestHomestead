@@ -9,10 +9,7 @@ body {
 }
 
 .banner {
-  display: flex;
   flex-direction: column;
-  /* background-image: url(https://i.imgur.com/BtLtitr.jpg); */
-  /* background-image: url(https://www.horsefarmsforever.com/wp-content/uploads/2020/05/horse-background2-980x516.jpg); */
   background-image: url(https://cdn.shopify.com/s/files/1/0310/2179/3325/articles/horse_in_pasture_1280x.jpg?v=1676651375);
   background-size: cover;
   background-position: center;
@@ -22,6 +19,17 @@ body {
   justify-content: center;
   color: white;
   font-family: "Londrina Outline", cursive;
+}
+
+.banner-title {
+  padding-top: 110px;
+
+}
+#login {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
 }
 
 nav {
