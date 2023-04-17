@@ -3,7 +3,12 @@ from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth import login
 from .forms import RegisterForm
-from .models import Animal
+from .models import Animal, Photo
+import uuid
+import boto3
+
+S3_BASE_URL = 'https://s3-us-east-2.amazonaws.com/'
+BUCKET = 'harvest-homestead'
 
 
 # Main app 
@@ -76,3 +81,19 @@ def crops_index(request):
 def equipment_index(request):
   return render(request, 'equipment/index.html')
 
+
+
+#AWS
+
+def add_photo(request, animal_id):
+  photo_file = request.FILES.get('photo_file', None)
+  if photo_file:
+    s3 = boto3.client('s3')
+    key = 'harvest-homestead/' + uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+    try:
+      s3.upload_fileobj(photo_file, BUCKET, key)
+      url = f'{S3_BASE_URL}{BUCKET}/{key}'
+      Photo.objects.create(url=url, animal_id=animal_id)
+    except:
+      print('An error occured uploading file to S3.')
+  return redirect('animals_detail', animal_id=animal_id)
