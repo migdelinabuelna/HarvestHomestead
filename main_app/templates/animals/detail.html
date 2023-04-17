@@ -7,21 +7,23 @@
 {% block content %}
 <h1> ANIMAL DETAILS </h1>
 
-<div class="row">
+<body>
+    <div class="row">
     <div class="col row">
-        <div class="card-div">
-          <a href="{% url 'animals_detail' animal.id %}">
-            <div class="card col s12 m6">
-            <div class="card-content">
-              <p>Animal: {{ animal.name }}</span>
-              <p>Breed: {{ animal.breed }}</p>
-              <p>Preferred Living Conditions: {{ animal.preferred_living_conditions }}</p>
-            </div>
-            <div class="card-action">
-                <a href="{% url 'animals_update' animal.id %}">Edit</a>
-            </div>
-            </div>
+    <div class="card-div">
+        <a href="{% url 'animals_detail' animal.id %}">
+    <div class="card col s12 m6">
+        <div class="card-content">
+            <p>Animal: {{ animal.name }}</span>
+            <p>Breed: {{ animal.breed }}</p>
+            <p>Ideal Habitat: {{ animal.preferred_living_conditions }}</p>
         </div>
+    <div class="card-action">
+        <a href="{% url 'animals_update' animal.id %}">Edit</a>
     </div>
-</div>   
+    </div>
+    </div>
+    </div>
+    </div>
+</body>   
 {% endblock content %}
