@@ -23,7 +23,6 @@ body {
 
 .banner-title {
   padding-top: 110px;
-
 }
 #login {
   display: flex;
@@ -54,9 +53,4 @@ footer {
   display: flex;
   flex-direction: row;
   padding-left: 20px;
-}
-.resource-sides {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
 }
