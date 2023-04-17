@@ -16,5 +16,8 @@ urlpatterns = [
 
   #equipment/crops
   path('equipment/', views.equipment_index, name='equipment_index'),
+
+  #photo
+  path('animals/<int:animal_id>/add_photo', views.add_photo, name='add_photo')
 ]
 
