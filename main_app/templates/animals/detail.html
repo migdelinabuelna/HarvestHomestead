@@ -15,9 +15,9 @@
           <a href="{% url 'animals_detail' animal.id %}">
             <div class="card col s12 m6">
             <div class="card-content">
-              <p>Animal: {{ a.name }}</span>
-              <p>Breed: {{ a.breed }}</p>
-              <p>Preferred Living Conditions: {{ a.preferred_living_conditions }}</p>
+              <p>Animal: {{ animal.name }}</span>
+              <p>Breed: {{ animal.breed }}</p>
+              <p>Preferred Living Conditions: {{ animal.preferred_living_conditions }}</p>
             </div>
             <div class="card-action">
                 <a href="{% url 'animals_update' animal.id %}">Edit</a>
