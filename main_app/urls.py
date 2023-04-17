@@ -9,6 +9,12 @@ urlpatterns = [
   path('animals/create', views.AnimalCreate.as_view(), name='animals_create'),
   path('animals/<int:pk>/update/', views.AnimalUpdate.as_view(), name='animals_update'),
   path('animals/<int:pk>/update/', views.AnimalDelete.as_view(), name='animals_delete'),
-  path('accounts/signup/', views.signup, name="signup")
+  path('accounts/signup/', views.signup, name='signup'),
+
+  #feed/crops
+  path('crops/', views.crops_index, name='crops_index'),
+
+  #equipment/crops
+  path('equipment/', views.equipment_index, name='equipment_index'),
 ]
 

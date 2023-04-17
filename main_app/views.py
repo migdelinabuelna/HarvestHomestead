@@ -18,7 +18,7 @@ def about(request):
 
 def animals_index(request):
   animal = Animal.objects.all()
-  return render(request, 'animals/index.html', {'animal': animal}) #rendeing to folder animas file about
+  return render(request, 'animals/index.html', {'animal': animal}) #rendeing to folder animals file about
   
 
 def animals_detail(request, animal_id):
@@ -62,17 +62,10 @@ def signup(request):
 
 
 
+#crops/feed resource 
 
-
-
-
-
-
-
-
-##feed resource 
-
-
+def crops_index(request):
+  return render(request,'crops/index.html')
 
 
 
@@ -80,5 +73,6 @@ def signup(request):
 
 #equipment resource 
 
-
+def equipment_index(request):
+  return render(request, 'equipment/index.html')
 
