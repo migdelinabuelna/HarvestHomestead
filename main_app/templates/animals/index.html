@@ -1,31 +1,25 @@
-{% extends 'base.html' %}
-{% load static %}
-
-
-{% block title %}
-    LIVESTOCK
-{% endblock title %}
-    
-
+{% extends 'base.html' %} 
+{% load static %} 
+{% block title %} 
+LIVESTOCK 
+{%endblock title %} 
 {% block content %}
-<h1> LIVESTOCK </h1>
+<h1>LIVESTOCK</h1>
 
 <body>
+<div class="index-card">
+  <div class="row">
     {% for a in animal %}
-    <div class="col row">
-        <div class="card-div">
-          <a href="{% url 'animals_detail' a.id %}">
-          <div class="card col s12 m6">
-            <div class="card-content">
-              <p>Animal: {{ a.name }}</span>
-              <p>Breed: {{ a.breed }}</p>
-              <p>Preferred Living Conditions: {{ a.preferred_living_conditions }}</p>
-            </div>
-          </div>
-          </a>
+    <div class="col s6">
+      <div class="card">
+        <div class="card-content">
+          <p>Animal: {{ a.name }}</p>
+          <p>Breed: {{ a.breed }}</p>
         </div>
+      </div>
     </div>
-{% endfor %}
+    {% endfor %}
+  </div>
+</div>
 </body>
 {% endblock content %}
-    
