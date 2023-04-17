@@ -38,11 +38,10 @@ footer {
 /* HOMEPAGE */
 
 .responsive-img {
-  display: flex;
-  flex-direction: row;
   max-width: 100%;
-  height: auto;
+  height: auto;  
 }
+
 .homepage-container {
   display: flex;
   flex-direction: row;
@@ -53,3 +52,4 @@ footer {
   flex-direction: column;
   justify-content: center;
 }
+
