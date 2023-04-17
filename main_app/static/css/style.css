@@ -21,20 +21,20 @@ body {
   width: 100%;
   justify-content: center;
   color: white;
-  font-family: 'Londrina Outline', cursive;
+  font-family: "Londrina Outline", cursive;
 }
 
 nav {
   display: flex;
   justify-content: center;
-  background-color: #14110C;
+  background-color: #14110c;
 }
 
 footer {
   width: 100%;
-  background-color: #14110C;
+  background-color: #14110c;
 }
- 
+
 /* HOMEPAGE */
 
 .responsive-img {
@@ -42,5 +42,14 @@ footer {
   flex-direction: row;
   max-width: 100%;
   height: auto;
-
+}
+.homepage-container {
+  display: flex;
+  flex-direction: row;
+  padding-left: 20px;
+}
+.resource-sides {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
