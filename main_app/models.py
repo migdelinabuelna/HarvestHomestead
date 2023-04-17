@@ -7,7 +7,7 @@ class Animal(models.Model):
     name = models.CharField(max_length=50)
     breed = models.CharField(max_length=50)
     preferred_living_conditions = models.CharField(max_length=50)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
 
 class Farm(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
