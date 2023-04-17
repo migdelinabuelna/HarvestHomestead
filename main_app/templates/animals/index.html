@@ -11,20 +11,22 @@
 <h1> ANIMAL LIST</h1>
 
 <body>
-<div class="col row">
-<div class="card-div">
-  <a href="{% url 'animals_index' %}">
-  <div class="card col s12 m6">
-    <div class="card-content">
-      <p>Animal: {{ animal.name }}</span>
-      <p>Breed: {{ animal.breed }}</p>
-      <p>Preferred Living Conditions: {{ animal.preferred_living_conditions }}</p>
-      <p>User: {{ animal.user }} </p>
+    {% for a in animal %}
+    <div class="col row">
+        <div class="card-div">
+          <a href="{% url 'animals_detail' a.id %}">
+          <div class="card col s12 m6">
+            <div class="card-content">
+              <p>Animal: {{ a.name }}</span>
+              <p>Breed: {{ a.breed }}</p>
+              <p>Preferred Living Conditions: {{ a.preferred_living_conditions }}</p>
+              <p>User: {{ a.user }} </p>
+            </div>
+          </div>
+          </a>
+        </div>
     </div>
-  </div>
-  </a>
-</div>
-</div>
+{% endfor %}
 </body>
 {% endblock content %}
     
