@@ -12,8 +12,6 @@
 
 <body>
     {% for a in animal %}
-    <div class="homepage-container">
-    <div class="source-page"> 
     <div class="col row">
         <div class="card-div">
           <a href="{% url 'animals_detail' a.id %}">
@@ -26,8 +24,6 @@
           </div>
           </a>
         </div>
-    </div>
-    </div>
     </div>
 {% endfor %}
 </body>
