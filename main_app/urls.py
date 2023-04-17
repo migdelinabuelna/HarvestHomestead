@@ -9,5 +9,6 @@ urlpatterns = [
   path('animals/create', views.AnimalCreate.as_view(), name='animals_create'),
   path('animals/<int:pk>/update/', views.AnimalUpdate.as_view(), name='animals_update'),
   path('animals/<int:pk>/update/', views.AnimalDelete.as_view(), name='animals_delete'),
+  path('accounts/signup/', views.signup, name="signup")
 ]
 
