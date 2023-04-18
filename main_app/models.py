@@ -21,7 +21,7 @@ class Photo(models.Model):
     def __str__(self):
         return f'Photo for animal_id {self.animal_id} @{self.url}'
     
-class Crops(models.Model):
+class Crop(models.Model):
     name = models.CharField(max_length=50)
     water_dependancy = models.IntegerField()
     growing_season = models.CharField(max_length=10)
@@ -50,7 +50,7 @@ class Equipment(models.Model):
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     animal = models.ForeignKey(Animal, on_delete=models.CASCADE, blank=True, null=True)
-    crop = models.ForeignKey(Crops, on_delete=models.CASCADE, blank=True, null=True)
+    crop = models.ForeignKey(Crop, on_delete=models.CASCADE, blank=True, null=True)
     equipment = models.ForeignKey(Equipment,on_delete=models.CASCADE, blank=True, null=True)
     comment = models.CharField(max_length = 150)
     date = models.DateField(auto_now=True)
