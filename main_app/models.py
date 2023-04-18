@@ -24,7 +24,7 @@ class Photo(models.Model):
 class Crop(models.Model):
     name = models.CharField(max_length=50)
     water_dependancy = models.IntegerField()
-    growing_season = models.CharField(max_length=10)
+    growing_season = models.CharField(max_length=50)
     optimal_growing_conditions = models.CharField(max_length=100)
     average_growth_time = models.CharField(max_length=25)
     user = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
@@ -46,6 +46,9 @@ class Equipment(models.Model):
     fuel_type = models.CharField(max_length=1, choices=FUEL_TYPE, default=FUEL_TYPE[0][0])
     engine_information = models.CharField(max_length=100)
     user = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
+
+    def __str__(self):
+        return f'{self.get_fuel_type_display}'
 
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
