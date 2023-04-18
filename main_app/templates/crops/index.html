@@ -8,7 +8,7 @@
     
 
 {% block content %}
-<h1>CROPS/ANIMAL FEED</h1>
+<h1>CROPS</h1>
 
 
 <body>
@@ -20,6 +20,10 @@
         <div class="card">
           <div class="card-content">
             <p>Crop: {{ c.name }}</p>
+            <p>Irrigation Needs: {{ c.water_dependency }} inches per year</p>
+            <p>Planting Season: {{ c.growing_season }}</p>
+            <p>Hardiness Zone: {{ c.optimal_growing_conditions}}</p>
+            <p>Maturity Days: {{ c.average_growth_time}}</p>
           </div>
         </div>
       </div>
