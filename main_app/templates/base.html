@@ -40,9 +40,9 @@
           {% if user.is_authenticated %}
           <a class='dropdown-trigger btn white-text black' href='#' data-target='dropdown1'>ADD!</a>
           <ul id='dropdown1' class='dropdown-content'>
-              <li><a href="{% url 'animals_create' %}">ADD ANIMAL</a></li>
-              <li><a href="{% url 'crops_create' %}">ADD CROPS</a></li>
-              <li><a href="{% url 'equipment_create' %}">ADD EQUIP</a></li>
+              <li><a class="black-text" href="{% url 'animals_create' %}">ADD ANIMAL</a></li>
+              <li><a class="black-text" href="{% url 'crops_create' %}">ADD CROPS</a></li>
+              <li><a class="black-text" href="{% url 'equipment_create' %}">ADD EQUIP</a></li>
           </ul>
           {% endif %}
         </ul>

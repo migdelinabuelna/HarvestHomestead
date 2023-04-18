@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    title
+{% endblock title %}
+    
+{% block content %}
+<h1> EQUIPMENT DETAILS </h1>
+
+<body>
+    <div class="details-page">
+        <div class="row">
+            <div class="col s5">
+                <div class="equipment-detail">
+                    <p><strong>Make:</strong>{{ equipment.make }}</p>
+                    <p><strong>Model:</strong>{{ equipment.model }}</p>
+                    <p><strong>Hydraulics:</strong>{{ equipment.hydraulic_rating }}</p>
+                    <p><strong>Year:</strong>{{ equipment.year }}</p>
+                    <p><strong>Color:</strong>{{ equipment.color }}</p>
+                    <p><strong>Description:</strong>{{ equipment.description }}</p>
+                    <p><strong>Fuel Type:</strong>{{ equipment.fuel_type }}</p>
+                    <p><strong>Engine Info:</strong>{{ equipment.engine_information }}</p>
+                </div>
+            </div>
+        </div>
+            <div class="comment">
+                <form action=""></form>
+            </div>
+        </div>
+    </div>
+</body>   
+{% endblock content %}
