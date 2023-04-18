@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth import login
-from .models import Animal, Photo, Farm, Equipment, Crops
+from .models import Animal, Photo, Farm, Equipment, Crop, Comment
 from django.contrib.auth.forms import UserCreationForm
 from .forms import RegisterFarmForm
 import uuid
@@ -51,6 +51,14 @@ class AnimalDelete(DeleteView):
     model = Animal
     success_url = '/animals/'
 
+def animals_new_comment(request, animal_id):
+    form = Comment(request.POST)
+    form.animal = animal_id
+    form.user = request.user_id
+    form.save()
+    return redirect('home')
+
+
 # accounts
 
 
@@ -88,17 +96,17 @@ def crops_index(request):
     return render(request, 'crops/index.html')
 
 def crops_detail(request, crop_id):
-  crop = Crops.objects.get(id=crop_id)
+  crop = Crop.objects.get(id=crop_id)
   return render(request, 'crops/detail.html', {'crops': crop})
 
 
 class CropsCreate(CreateView):
-  model = Crops
+  model = Crop
   fields = ['name', 'water_dependancy', 'growing_season', 'optimal_growing_conditions', 'average_growth_time']
   success_url = '/crops/'
 
 class CropsUpdate(UpdateView):
-  model = Crops
+  model = Crop
   fields = ['name', 'water_dependancy', 'growing_season', 'optimal_growing_conditions', 'average_growth_time']
   success_url = '/crops/'
 
