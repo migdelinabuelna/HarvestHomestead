@@ -14,6 +14,7 @@ urlpatterns = [
   #accounts
   path('accounts/signup/', views.signup, name='signup'),
   path('accounts/<int:user_id>/new_farm', views.new_farm, name='new_farm'),
+  path('user/<int:user_id>', views.user_index, name='user_index'),
 
   #feed/crops
   path('crops/', views.crops_index, name='crops_index'),
