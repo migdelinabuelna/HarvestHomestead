@@ -26,3 +26,31 @@ class Photo(models.Model):
 
     def __str__(self):
         return f'Photo for animal_id {self.animal_id} @{self.url}'
+    
+class Crops(models.Model):
+    name = models.CharField(max_length=50)
+    water_dependancy = models.IntegerField()
+    growing_season = models.CharField(max_length=10)
+    optimal_growing_conditions = models.CharField(max_length=100)
+    average_growth_time = models.CharField(max_length=25)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
+
+FUEL_TYPE = (
+    ('G', 'Gasoline'),
+    ('D', 'Diesel'),
+    ('K', 'Kerosene'),
+    ('L', 'LP Gas'),
+)
+
+class Equipment(models.Model):
+    make = models.CharField(max_length=50)
+    model = models.CharField(max_length=50)
+    hydraulic_rating = models.IntegerField()
+    year = models.IntegerField()
+    color = models.CharField(max_length=20)
+    description = models.TextField(max_length=250)
+    fuel_type = models.CharField(max_length=1, choices=FUEL_TYPE, default=FUEL_TYPE[0][0])
+    engine_information = models.CharField(max_length=100)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
+
+
