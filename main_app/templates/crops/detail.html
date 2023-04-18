@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    CROPS
+{% endblock title %}
+    
+{% block content %}
+<h1> CROP DETAILS </h1>
+
+<body>
+    <div class="details-page">
+        <div class="row">
+            <div class="col s6">
+                <div class="crop-detail">
+                    <p><strong>Crop:</strong> {{ c.name }}</p>
+                    <p><strong>Irrigation Needs:</strong> {{ c.water_dependency }} inches per year</p>
+                    <p><strong>Planting Season:</strong> {{ c.growing_season }}</p>
+                    <p><strong>Hardiness Zone:</strong> {{ c.optimal_growing_conditions}}</p>
+                    <p><strong>Maturity Days:</strong> {{ c.average_growth_time}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>   
+{% endblock content %}
