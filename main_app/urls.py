@@ -14,15 +14,15 @@ urlpatterns = [
 
   #feed/crops
   path('crops/', views.crops_index, name='crops_index'),
-#   path('crops/<int:crop_id>/', views.crops_detail, name='crops_detail'),
-#   path('crops/create', views.CropCreate.as_view(), name='crops_create'),
-#   path('crops/<int:pk>/update/', views.CropUpdate.as_view(), name='crops_update'),
+  path('crops/<int:crop_id>/', views.crops_detail, name='crops_detail'),
+  path('crops/create', views.CropsCreate.as_view(), name='crops_create'),
+  path('crops/<int:pk>/update/', views.CropsUpdate.as_view(), name='crops_update'),
 
   #equipment/crops
   path('equipment/', views.equipment_index, name='equipment_index'),
-#   path('equipment/<int:equipment_id>/', views.equipment_detail, name='equipment_detail'),
-#   path('equipment/create', views.EquipmentCreate.as_view(), name='equipment_create'),
-#   path('equipment/<int:pk>/update/', views.EquipmentUpdate.as_view(), name='equipment_update'),
+  path('equipment/<int:equipment_id>/', views.equipment_detail, name='equipment_detail'),
+  path('equipment/create', views.EquipmentCreate.as_view(), name='equipment_create'),
+  path('equipment/<int:pk>/update/', views.EquipmentUpdate.as_view(), name='equipment_update'),
 
   
 
