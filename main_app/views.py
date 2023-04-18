@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth import login
-from .models import Animal, Photo, Farm, Equipment, Crops
+from .models import Animal, Photo, Farm, Equipment, Crop
 from django.contrib.auth.forms import UserCreationForm
 from .forms import RegisterFarmForm
 import uuid
@@ -85,20 +85,21 @@ def new_farm(request, user_id):
 # crops/feed resource
 
 def crops_index(request):
-    return render(request, 'crops/index.html')
+    crop = Crop.objects.all()
+    return render(request, 'crops/index.html', {'crop': crop})
 
 def crops_detail(request, crop_id):
-  crop = Crops.objects.get(id=crop_id)
-  return render(request, 'crops/detail.html', {'crops': crop})
+  crop = Crop.objects.get(id=crop_id)
+  return render(request, 'crops/detail.html', {'crop': crop})
 
 
 class CropsCreate(CreateView):
-  model = Crops
+  model = Crop
   fields = ['name', 'water_dependancy', 'growing_season', 'optimal_growing_conditions', 'average_growth_time']
   success_url = '/crops/'
 
 class CropsUpdate(UpdateView):
-  model = Crops
+  model = Crop
   fields = ['name', 'water_dependancy', 'growing_season', 'optimal_growing_conditions', 'average_growth_time']
   success_url = '/crops/'
 
