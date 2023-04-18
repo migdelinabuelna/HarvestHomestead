@@ -2,18 +2,16 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
-    />
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"/>
     <link
       rel="stylesheet"
       type="text/css"
-      href="{% static 'css/style.css' %}"
-    />
+      href="{% static 'css/style.css' %}"/>
     <title>{% block title%} {% endblock title %}</title>
   </head>
   <body>
@@ -23,33 +21,40 @@
           {% if user.is_authenticated %}
           <li><a href="{% url 'logout' %}">LOGOUT</a></li>
           {% else %}
-          <li><a href="{% url 'login' %}">LOGIN</a></li>
-          <li><a href="{% url 'signup' %}">SIGNUP</a></li>
+         <li><a href="{% url 'login' %}">LOGIN</a></li>
+          <li><a href="#">SIGNUP</a></li>
           {% endif %}
-        </ul>
-        <br />
+        </ul><br>
       </div>
-      <h5 class="banner-title">HARVEST HOMESTEAD</h5>
-    </header>
+    <h5 class="banner-title"> HARVEST HOMESTEAD </h5>
+  </header>
     <nav id="navigation-bar">
-      <div class="nav-wrapper">
-        <ul>
-          <li><a href="{% url 'home' %}"> HOME </a></li>
-          <li><a href="{% url 'about' %}">ABOUT</a></li>
-          <li><a href="{% url 'animals_index' %}">LIVESTOCK</a></li>
-          <li><a href="{% url 'crops_index' %}">CROPS</a></li>
-          <li><a href="{% url 'equipment_index' %}"> EQUIPMENT </a></li>
-          {% if user.is_authenticated %}
-          <li><a href="{% url 'animals_create' %}">ADD LIVESTOCK</a></li>
-          {% endif %}
-        </ul>
-      </div>
-    </nav>
+        <div class="nav-wrapper">
+          <ul>
+            <li><a href="{% url 'home' %}"> HOME </a></li>
+            <li><a href="{% url 'about' %}">ABOUT</a></li>
+            <li><a href="{% url 'animals_index' %}">LIVESTOCK</a></li>
+            <li><a href="{% url 'crops_index' %}">CROPS</a></li>
+            <li><a href="{% url 'equipment_index' %}"> EQUIPMENT </a></li>
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'animals_create' %}">ADD LIVESTOCK</a></li>
+            {% endif %}
+          </ul>
+        </div>
+      </nav>
     {% block content %} 
-    
     {% endblock content %}
     <footer>
-      <p>footer</p>
+      <h6 class="footer-title">HARVEST HOMESTEAD</h6>
+      <div id="emails">
+      <ul>
+        <li>Contact our creators</li>
+        <li>Brett.schoff@gmail.com</li>
+        <li>Migdelina17@yahoo.com</li>
+        <li>ndm9412@gmail.com</li>
+      </ul>
+      </div>
+      
     </footer>
   </body>
 </html>
