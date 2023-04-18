@@ -2,7 +2,9 @@ from django.shortcuts import render, redirect
 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth import login
+
 from .models import Animal, Photo, Farm, Equipment, Crop, Comment
+
 from django.contrib.auth.forms import UserCreationForm
 from .forms import RegisterFarmForm
 import uuid
@@ -93,12 +95,12 @@ def new_farm(request, user_id):
 # crops/feed resource
 
 def crops_index(request):
-    return render(request, 'crops/index.html')
+    crop = Crop.objects.all()
+    return render(request, 'crops/index.html', {'crop': crop})
 
 def crops_detail(request, crop_id):
   crop = Crop.objects.get(id=crop_id)
-  return render(request, 'crops/detail.html', {'crops': crop})
-
+  return render(request, 'crops/detail.html', {'crop': crop})
 
 class CropsCreate(CreateView):
   model = Crop

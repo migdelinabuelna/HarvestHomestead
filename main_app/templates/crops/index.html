@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 
+{% load static %} 
 
 {% block title %}
     CROPS
@@ -8,4 +9,24 @@
 
 {% block content %}
 <h1>CROPS/ANIMAL FEED</h1>
+
+
+<body>
+<div class="index-card">
+  <div class="row">
+    {% for c in crop %}
+    <a href="{% url 'crop_detail' c.id %}">
+      <div class="col s6">
+        <div class="card">
+          <div class="card-content">
+            <p>Crop: {{ c.name }}</p>
+          </div>
+        </div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</div>
+</body>
 {% endblock content %}
+
