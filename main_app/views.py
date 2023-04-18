@@ -31,7 +31,8 @@ def animals_index(request):
 
 def animals_detail(request, animal_id):
     animal = Animal.objects.get(id=animal_id)
-    return render(request, 'animals/detail.html', {'animal': animal})
+    photo = animal.photo_set.all()
+    return render(request, 'animals/detail.html', {'animal': animal, 'photo': photo})
 
 
 class AnimalCreate(CreateView):
@@ -129,8 +130,7 @@ def add_photo(request, animal_id):
     photo_file = request.FILES.get('photo_file', None)
     if photo_file:
         s3 = boto3.client('s3')
-        key = 'harvest-homestead/' + \
-            uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+        key = 'harvest-homestead/' + uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
         try:
             s3.upload_fileobj(photo_file, BUCKET, key)
             url = f'{S3_BASE_URL}{BUCKET}/{key}'
