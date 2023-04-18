@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth import login
 from .forms import RegisterForm
-from .models import Animal, Photo
+from .models import Animal, Photo, Crop, Equipment
 import uuid
 import boto3
 
@@ -72,6 +72,21 @@ def signup(request):
 def crops_index(request):
   return render(request,'crops/index.html')
 
+# def crops_detail(request, crop_id):
+#   crop = Crop.objects.get(id=crop_id)
+#   return render(request, 'crops/detail.html', {'crops': crop})
+
+
+# class CropCreate(CreateView):
+#   model = Crop
+#   fields = ['name', 'water_dependancy', 'growing_season, optimal_growing_conditions, average_growth_time']
+#   success_url = '/crops/'
+
+# class CropUpdate(UpdateView):
+#   model = Crop
+#   fields = ['name', 'water_dependancy', 'growing_season, optimal_growing_conditions, average_growth_time']
+#   success_url = '/crops/'
+
 
 
 
@@ -80,6 +95,21 @@ def crops_index(request):
 
 def equipment_index(request):
   return render(request, 'equipment/index.html')
+
+# def equipment_detail(request, equipment_id):
+#   equipment = Equipment.objects.get(id=equipment_id)
+#   return render(request, 'equipment/detail.html', {'equipment': equipment})
+
+
+# class EquipmentCreate(CreateView):
+#   model = Equipment
+#   fields = ['make', 'model', 'hydraulic_rating, year, color, description, fuel_type, engine_information']
+#   success_url = '/equipment/'
+
+# class EquipmentUpdate(UpdateView):
+#   model = Equipment
+#   fields = ['make', 'model', 'hydraulic_rating, year, color, description, fuel_type, engine_information']
+#   success_url = '/equipment/'
 
 
 
