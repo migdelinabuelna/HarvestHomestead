@@ -1,11 +1,33 @@
 {% extends 'base.html' %}
-
-
+{% load static %}
 {% block title %}
     EQUIPMENT
 {% endblock title %}
-    
-
 {% block content %}
 <h1>EQUIPMENT</h1>
+
+<body>
+    <div class="index-card">
+      <div class="row">
+        {% for e in equipment %}
+        <a href="{% url 'equipment_detail' e.id %}">
+          <div class="col s6">
+            <div class="card">
+              <div class="card-content">
+                <p>Make: {{ e.make }}</p>
+                <p>Model: {{ e.model }}</p>
+                <p>Hydraulics: {{ e.hydraulic_rating }}</p>
+                <p>Year: {{ e.year }}</p>
+                <p>Color: {{ e.color }}</p>
+                <p>Description: {{ e.description }}</p>
+                <p>Fuel Type: {{ e.fuel_type }}</p>
+                <p>Engine Info: {{ e.engine_information }}</p>
+              </div>
+            </div>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+    </body>
 {% endblock content %}
