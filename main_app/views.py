@@ -152,3 +152,8 @@ def add_photo(request, animal_id):
         except:
             print('An error occured uploading file to S3.')
     return redirect('animals_detail', animal_id=animal_id)
+
+#accounts
+
+def user_index(request, user_id):
+    return render(request, 'user/profile.html')
