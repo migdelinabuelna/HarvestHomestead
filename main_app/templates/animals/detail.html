@@ -8,22 +8,38 @@
 <h1> ANIMAL DETAILS </h1>
 
 <body>
-    <div class="row">
-    <div class="col row">
-    <div class="card-div">
-        <a href="{% url 'animals_detail' animal.id %}">
-    <div class="card col s12 m6">
-        <div class="card-content">
-            <p>Animal: {{ animal.name }}</span>
-            <p>Breed: {{ animal.breed }}</p>
-            <p>Ideal Habitat: {{ animal.preferred_living_conditions }}</p>
+    <div class="details-page">
+        <div class="row">
+            <div class="col s4 offset-s2">
+                <div class="photo">
+                    
+                    {% for photo in animal.photo_set.all %}
+                    <img src="{{photo.url}}" alt="No Photo available" height="500" width="600">
+                    {% endfor %}
+                        
+                </div>
+            </div>
+            <div class="col s5">
+                <div class="animal-detail">
+                    <p><strong>Name:</strong>{{animal.name}}</p>
+                    <p><strong>Breed:</strong>{{animal.breed}}</p>
+                    <p><strong>Living Conditions:</strong>{{animal.preferred_living_conditions}}</p>
+                </div>
+            </div>
         </div>
-    <div class="card-action">
-        <a href="{% url 'animals_update' animal.id %}">Edit</a>
-    </div>
-    </div>
-    </div>
-    </div>
+        <div class="row">
+            <div class="col s1 offset-s7">
+                <form action="{% url 'add_photo' animal.id %}" enctype="multipart/form-data" method="POST">
+                    {% csrf_token %}
+                    <input type="file" name="photo_file">
+                    <br><br>
+                    <input type="submit" class="upload-photo" value="Upload Photo">
+                </form>
+            </div>
+            <a href="{% url 'animals_update' animal.id%}">
+                <button>Update Animal</button>
+            </a>
+        </div>
     </div>
 </body>   
 {% endblock content %}
