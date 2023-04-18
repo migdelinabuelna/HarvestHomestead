@@ -6,7 +6,7 @@ from django.contrib.auth import login
 from .models import Animal, Photo, Farm, Equipment, Crop, Comment
 
 from django.contrib.auth.forms import UserCreationForm
-from .forms import RegisterFarmForm
+from .forms import RegisterFarmForm, CommentForm
 import uuid
 import boto3
 
@@ -34,7 +34,8 @@ def animals_index(request):
 def animals_detail(request, animal_id):
     animal = Animal.objects.get(id=animal_id)
     photo = animal.photo_set.all()
-    return render(request, 'animals/detail.html', {'animal': animal, 'photo': photo})
+    comment = animal.comment_set.all()
+    return render(request, 'animals/detail.html', {'animal': animal, 'photo': photo, 'comment': comment})
 
 
 class AnimalCreate(CreateView):
@@ -54,10 +55,12 @@ class AnimalDelete(DeleteView):
     success_url = '/animals/'
 
 def animals_new_comment(request, animal_id):
-    form = Comment(request.POST)
-    form.animal = animal_id
-    form.user = request.user_id
-    form.save()
+    form = CommentForm(request.POST)
+    if form.is_valid():
+        new_form = form.save(commit=False)
+        new_form.animal_id = animal_id
+        new_form.user_id = request.user.id
+        new_form.save()
     return redirect('home')
 
 
