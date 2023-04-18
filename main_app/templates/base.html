@@ -15,6 +15,7 @@
       href="{% static 'css/style.css' %}"
     />
     <title>{% block title%} {% endblock title %}</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   </head>
   <body>
     <header class="banner">
@@ -40,7 +41,12 @@
           <li><a href="{% url 'crops_index' %}">CROPS</a></li>
           <li><a href="{% url 'equipment_index' %}"> EQUIPMENT </a></li>
           {% if user.is_authenticated %}
-          <li><a href="{% url 'animals_create' %}">ADD LIVESTOCK</a></li>
+          <a class='dropdown-trigger btn white-text black' href='#' data-target='dropdown1'>ADD!</a>
+          <ul id='dropdown1' class='dropdown-content'>
+              <li><a href="{% url 'animals_create' %}">ADD ANIMAL</a></li>
+              <li><a href="{% url 'crops_create' %}">ADD CROPS</a></li>
+              <li><a href="{% url 'equipment_create' %}">ADD EQUIP</a></li>
+          </ul>
           {% endif %}
         </ul>
       </div>
@@ -51,5 +57,11 @@
     <footer>
       <p>footer</p>
     </footer>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.dropdown-trigger');
+    var instances = M.Dropdown.init(elems);
+  });
+    </script>
   </body>
 </html>
