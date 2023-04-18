@@ -2,8 +2,9 @@ from django.shortcuts import render, redirect
 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth import login
-from .forms import RegisterForm
-from .models import Animal, Photo
+from .models import Animal, Photo, Farm
+from django.contrib.auth.forms import UserCreationForm
+from .forms import RegisterFarmForm
 import uuid
 import boto3
 
@@ -11,66 +12,79 @@ S3_BASE_URL = 'https://s3-us-east-2.amazonaws.com/'
 BUCKET = 'harvest-homestead'
 
 
-# Main app 
+# Main app
 def home(request):
-  return render(request,'home.html')
+    return render(request, 'home.html')
+
 
 def about(request):
-  return render(request, 'about.html')
+    return render(request, 'about.html')
 
 
-##animal resource 
+# animal resource
 
 def animals_index(request):
-  animal = Animal.objects.all()
-  return render(request, 'animals/index.html', {'animal': animal}) #rendeing to folder animals file about
-  
+    animal = Animal.objects.all()
+    # rendeing to folder animals file about
+    return render(request, 'animals/index.html', {'animal': animal})
+
 
 def animals_detail(request, animal_id):
-  animal = Animal.objects.get(id=animal_id)
-  return render(request, 'animals/detail.html', {'animal': animal})
+    animal = Animal.objects.get(id=animal_id)
+    return render(request, 'animals/detail.html', {'animal': animal})
 
 
 class AnimalCreate(CreateView):
-  model = Animal
-  fields = ['name', 'breed', 'preferred_living_conditions']
-  success_url = '/animals/'
+    model = Animal
+    fields = ['name', 'breed', 'preferred_living_conditions']
+    success_url = '/animals/'
+
 
 class AnimalUpdate(UpdateView):
-  model = Animal
-  fields = ['name', 'breed', 'preferred_living_conditions']
-  success_url = '/animals/'
-  
+    model = Animal
+    fields = ['name', 'breed', 'preferred_living_conditions']
+    success_url = '/animals/'
+
 
 class AnimalDelete(DeleteView):
-  model = Animal
-  success_url = '/animals/'
+    model = Animal
+    success_url = '/animals/'
 
-## accounts
+# accounts
+
 
 def signup(request):
-  error_message = ''
-  if request.method == 'POST':
-    form = RegisterForm(request.POST)
-    if form.is_valid():
-      user = form.save()
-      login(request, user)
-      return redirect('home')
-    else:
-      error_message = 'Invaild sign up - try again'
-  form = RegisterForm()
-  context = {'form': form, 'error_message': error_message}
-  return render(request, 'registration/signup.html', context)
+    error_message = ''
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('home')
+        else:
+            error_message = 'Invaild sign up - try again'
+    form = UserCreationForm()
+    context = {'form': form, 'error_message': error_message}
+    return render(request, 'registration/signup.html', context)
 
+def new_farm(request, user_id):
+    error_message = ''
+    if request.method == 'POST':
+        form = RegisterFarmForm(request.POST)
+        if form.is_valid():
+            form.user = user_id
+            form = form.save()
+            return redirect('home')
+        else:
+            error_message = 'Invaild Farm - try again'
+    form = RegisterFarmForm()
+    context = {'form': form, 'error_message': error_message}
+    return render(request, 'registration/farm.html', context)
 
-
-
-
-
-#crops/feed resource 
+# crops/feed resource
 
 def crops_index(request):
-  return render(request,'crops/index.html')
+    return render(request, 'crops/index.html')
 
 # def crops_detail(request, crop_id):
 #   crop = Crop.objects.get(id=crop_id)
@@ -88,13 +102,10 @@ def crops_index(request):
 #   success_url = '/crops/'
 
 
-
-
-
-#equipment resource 
+# equipment resource
 
 def equipment_index(request):
-  return render(request, 'equipment/index.html')
+    return render(request, 'equipment/index.html')
 
 # def equipment_detail(request, equipment_id):
 #   equipment = Equipment.objects.get(id=equipment_id)
@@ -112,18 +123,18 @@ def equipment_index(request):
 #   success_url = '/equipment/'
 
 
-
-#AWS
+# AWS
 
 def add_photo(request, animal_id):
-  photo_file = request.FILES.get('photo_file', None)
-  if photo_file:
-    s3 = boto3.client('s3')
-    key = 'harvest-homestead/' + uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
-    try:
-      s3.upload_fileobj(photo_file, BUCKET, key)
-      url = f'{S3_BASE_URL}{BUCKET}/{key}'
-      Photo.objects.create(url=url, animal_id=animal_id)
-    except:
-      print('An error occured uploading file to S3.')
-  return redirect('animals_detail', animal_id=animal_id)
+    photo_file = request.FILES.get('photo_file', None)
+    if photo_file:
+        s3 = boto3.client('s3')
+        key = 'harvest-homestead/' + \
+            uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+        try:
+            s3.upload_fileobj(photo_file, BUCKET, key)
+            url = f'{S3_BASE_URL}{BUCKET}/{key}'
+            Photo.objects.create(url=url, animal_id=animal_id)
+        except:
+            print('An error occured uploading file to S3.')
+    return redirect('animals_detail', animal_id=animal_id)

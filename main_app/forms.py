@@ -1,22 +1,12 @@
-from django.contrib.auth.forms import UserCreationForm
+from django.forms import ModelForm
 from django import forms
 from django.contrib.auth.models import User
-from .models import Farm
 
-class RegisterForm(UserCreationForm):
-    username = forms.CharField(label = 'User Name')
+
+class RegisterFarmForm(ModelForm):
     farm_name = forms.CharField(label = 'Farm Name')
-    address = forms.CharField(label = 'Address')
+    address = forms.CharField(label = 'Farm Address')
 
     class Meta:
         model = User
-        fields = ('username', 'farm_name', 'address')
-
-    def save(self, commit=True):
-        user = super(RegisterForm, self).save(commit = False)
-        Farm.save()
-        user.farm_name = self.cleaned_data['farm_name']
-        user.address = self.cleaned_data['address']
-        if commit:
-            user.save()
-        return user
+        fields = ('farm_name', 'address')
