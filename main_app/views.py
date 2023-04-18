@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth import login
 from .forms import RegisterForm
-from .models import Animal, Photo, Crop, Equipment
+from .models import Animal, Photo
 import uuid
 import boto3
 
