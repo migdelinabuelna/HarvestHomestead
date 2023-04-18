@@ -58,3 +58,8 @@ footer {
 .index-card {
   margin: 0;
 }
+
+.container {
+  display: flex;
+  justify-content: center;
+}
