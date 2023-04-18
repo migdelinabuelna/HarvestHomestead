@@ -9,6 +9,9 @@ urlpatterns = [
   path('animals/create', views.AnimalCreate.as_view(), name='animals_create'),
   path('animals/<int:pk>/update/', views.AnimalUpdate.as_view(), name='animals_update'),
   path('animals/<int:pk>/update/', views.AnimalDelete.as_view(), name='animals_delete'),
+  path('animals/<int:animal_id>/new_comment', views.animals_new_comment, name='animals_new_comment'),
+
+  #accounts
   path('accounts/signup/', views.signup, name='signup'),
   path('accounts/<int:user_id>/new_farm', views.new_farm, name='new_farm'),
 
@@ -27,6 +30,6 @@ urlpatterns = [
   
 
   #photo
-  path('animals/<int:animal_id>/add_photo', views.add_photo, name='add_photo')
+  path('animals/<int:animal_id>/add_photo', views.add_photo, name='add_photo'),
 ]
 

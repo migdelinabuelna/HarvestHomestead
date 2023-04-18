@@ -2,7 +2,9 @@ from django.shortcuts import render, redirect
 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth import login
-from .models import Animal, Photo, Farm, Equipment, Crop
+
+from .models import Animal, Photo, Farm, Equipment, Crop, Comment
+
 from django.contrib.auth.forms import UserCreationForm
 from .forms import RegisterFarmForm
 import uuid
@@ -51,6 +53,14 @@ class AnimalDelete(DeleteView):
     model = Animal
     success_url = '/animals/'
 
+def animals_new_comment(request, animal_id):
+    form = Comment(request.POST)
+    form.animal = animal_id
+    form.user = request.user_id
+    form.save()
+    return redirect('home')
+
+
 # accounts
 
 
@@ -92,7 +102,6 @@ def crops_detail(request, crop_id):
   crop = Crop.objects.get(id=crop_id)
   return render(request, 'crops/detail.html', {'crop': crop})
 
-
 class CropsCreate(CreateView):
   model = Crop
   fields = ['name', 'water_dependancy', 'growing_season', 'optimal_growing_conditions', 'average_growth_time']
@@ -107,11 +116,12 @@ class CropsUpdate(UpdateView):
 # equipment resource
 
 def equipment_index(request):
-    return render(request, 'equipment/index.html')
+    equipment = Equipment.objects.all()
+    return render(request, 'equipment/index.html', {'equipment': equipment})
 
 def equipment_detail(request, equipment_id):
-  equipment = Equipment.objects.get(id=equipment_id)
-  return render(request, 'equipment/detail.html', {'equipment': equipment})
+    equipment = Equipment.objects.get(id=equipment_id)
+    return render(request, 'equipment/detail.html', {'equipment': equipment})
 
 
 class EquipmentCreate(CreateView):

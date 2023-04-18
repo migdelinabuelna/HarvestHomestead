@@ -14,12 +14,6 @@ class Farm(models.Model):
     farm_name = models.CharField(max_length=100)
     address = models.CharField(max_length=100, blank=True)
 
-class Comment(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    comment = models.CharField(max_length = 150)
-    date = models.DateField(auto_now=True)
-    vote = models.IntegerField(default=0)
-
 class Photo(models.Model):
     url = models.CharField(max_length=200)
     animal = models.ForeignKey(Animal, on_delete=models.CASCADE)
@@ -27,7 +21,7 @@ class Photo(models.Model):
     def __str__(self):
         return f'Photo for animal_id {self.animal_id} @{self.url}'
     
-class Crops(models.Model):
+class Crop(models.Model):
     name = models.CharField(max_length=50)
     water_dependancy = models.IntegerField()
     growing_season = models.CharField(max_length=10)
@@ -53,4 +47,11 @@ class Equipment(models.Model):
     engine_information = models.CharField(max_length=100)
     user = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
 
-
+class Comment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    animal = models.ForeignKey(Animal, on_delete=models.CASCADE, blank=True, null=True)
+    crop = models.ForeignKey(Crop, on_delete=models.CASCADE, blank=True, null=True)
+    equipment = models.ForeignKey(Equipment,on_delete=models.CASCADE, blank=True, null=True)
+    comment = models.CharField(max_length = 150)
+    date = models.DateField(auto_now=True)
+    vote = models.IntegerField(default=0)
