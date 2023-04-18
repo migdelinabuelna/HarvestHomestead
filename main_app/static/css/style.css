@@ -23,12 +23,15 @@ body {
 
 .banner-title {
   padding-top: 110px;
+
 }
 #login {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   align-items: flex-end;
+  margin-top: 0;
+  padding: 30px 40px 0 0 ;
 }
 
 nav {
@@ -49,17 +52,17 @@ footer {
   height: auto;
 }
 
-.homepage-container {
+#homepage-container {
   display: flex;
   flex-direction: row;
-  padding-left: 20px;
-}
+  align-items: center;
+  justify-content: space-evenly;
+ } 
 
-.index-card {
-  margin: 0;
-}
+#resource-livestock {
+  padding-left: 300px; 
+} 
 
-.container {
-  display: flex;
-  justify-content: center;
+#resource-size {
+  padding-right: 0;
 }
