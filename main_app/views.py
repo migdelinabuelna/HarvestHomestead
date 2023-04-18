@@ -106,11 +106,12 @@ class CropsUpdate(UpdateView):
 # equipment resource
 
 def equipment_index(request):
-    return render(request, 'equipment/index.html')
+    equipment = Equipment.objects.all()
+    return render(request, 'equipment/index.html', {'equipment': equipment})
 
 def equipment_detail(request, equipment_id):
-  equipment = Equipment.objects.get(id=equipment_id)
-  return render(request, 'equipment/detail.html', {'equipment': equipment})
+    equipment = Equipment.objects.get(id=equipment_id)
+    return render(request, 'equipment/detail.html', {'equipment': equipment})
 
 
 class EquipmentCreate(CreateView):
