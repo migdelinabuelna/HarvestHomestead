@@ -1,38 +1,38 @@
 /* BASE */
 
 body {
-  display: flex;
   min-height: 100vh;
   width: 100%;
-  flex-direction: column;
   text-align: center;
 }
 
 .banner {
-  flex-direction: column;
   background-image: url(https://cdn.shopify.com/s/files/1/0310/2179/3325/articles/horse_in_pasture_1280x.jpg?v=1676651375);
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
   height: 400px;
   width: 100%;
-  justify-content: center;
   color: white;
   font-family: "Londrina Outline", cursive;
 }
 
 .banner-title {
   padding-top: 110px;
-
 }
+
 #login {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   align-items: flex-end;
   margin-top: 0;
-  padding: 30px 40px 0 0 ;
+  padding: 30px 40px 0 0;
 }
+
+a { 
+  color: inherit; 
+} 
 
 nav {
   display: flex;
@@ -41,8 +41,23 @@ nav {
 }
 
 footer {
+  display: flex;
+  flex-direction: row;
   width: 100%;
   background-color: #14110c;
+  color: white;
+}
+
+.footer-title {
+  display: flex;
+  align-items: center;
+  padding-left: 30px;
+}
+
+#emails {
+  display: flex;
+  justify-content: flex-end;
+  width: 85%;
 }
 
 /* HOMEPAGE */
@@ -57,12 +72,17 @@ footer {
   flex-direction: row;
   align-items: center;
   justify-content: space-evenly;
- } 
+}
 
 #resource-livestock {
-  padding-left: 300px; 
-} 
+  padding-left: 300px;
+}
 
 #resource-size {
   padding-right: 0;
+}
+.animal-detail {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }

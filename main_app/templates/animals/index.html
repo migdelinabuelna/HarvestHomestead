@@ -10,14 +10,16 @@ LIVESTOCK
 <div class="index-card">
   <div class="row">
     {% for a in animal %}
-    <div class="col s6">
-      <div class="card">
-        <div class="card-content">
-          <p>Animal: {{ a.name }}</p>
-          <p>Breed: {{ a.breed }}</p>
+    <a href="{% url 'animals_detail' a.id %}">
+      <div class="col s6">
+        <div class="card">
+          <div class="card-content">
+            <p>Animal: {{ a.name }}</p>
+            <p>Breed: {{ a.breed }}</p>
+          </div>
         </div>
       </div>
-    </div>
+    </a>
     {% endfor %}
   </div>
 </div>
