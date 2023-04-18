@@ -10,6 +10,7 @@ urlpatterns = [
   path('animals/<int:pk>/update/', views.AnimalUpdate.as_view(), name='animals_update'),
   path('animals/<int:pk>/update/', views.AnimalDelete.as_view(), name='animals_delete'),
   path('accounts/signup/', views.signup, name='signup'),
+  path('accounts/<int:user_id>/new_farm', views.new_farm, name='new_farm'),
 
   #feed/crops
   path('crops/', views.crops_index, name='crops_index'),

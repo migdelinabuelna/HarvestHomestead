@@ -23,28 +23,30 @@
           {% if user.is_authenticated %}
           <li><a href="{% url 'logout' %}">LOGOUT</a></li>
           {% else %}
-         <li><a href="{% url 'login' %}">LOGIN</a></li>
-          <li><a href="#">SIGNUP</a></li>
+          <li><a href="{% url 'login' %}">LOGIN</a></li>
+          <li><a href="{% url 'signup' %}">SIGNUP</a></li>
           {% endif %}
-        </ul><br>
+        </ul>
+        <br />
       </div>
-    <h5 class="banner-title"> HARVEST HOMESTEAD </h5>
-  </header>
+      <h5 class="banner-title">HARVEST HOMESTEAD</h5>
+    </header>
     <nav id="navigation-bar">
-        <div class="nav-wrapper">
-          <ul>
-            <li><a href="{% url 'home' %}"> HOME </a></li>
-            <li><a href="{% url 'about' %}">ABOUT</a></li>
-            <li><a href="{% url 'animals_index' %}">LIVESTOCK</a></li>
-            <li><a href="{% url 'crops_index' %}">CROPS</a></li>
-            <li><a href="{% url 'equipment_index' %}"> EQUIPMENT </a></li>
-            {% if user.is_authenticated %}
-            <li><a href="{% url 'animals_create' %}">ADD LIVESTOCK</a></li>
-            {% endif %}
-          </ul>
-        </div>
-      </nav>
+      <div class="nav-wrapper">
+        <ul>
+          <li><a href="{% url 'home' %}"> HOME </a></li>
+          <li><a href="{% url 'about' %}">ABOUT</a></li>
+          <li><a href="{% url 'animals_index' %}">LIVESTOCK</a></li>
+          <li><a href="{% url 'crops_index' %}">CROPS</a></li>
+          <li><a href="{% url 'equipment_index' %}"> EQUIPMENT </a></li>
+          {% if user.is_authenticated %}
+          <li><a href="{% url 'animals_create' %}">ADD LIVESTOCK</a></li>
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
     {% block content %} 
+    
     {% endblock content %}
     <footer>
       <p>footer</p>
