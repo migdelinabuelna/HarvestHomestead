@@ -23,7 +23,7 @@ class Photo(models.Model):
     
 class Crop(models.Model):
     name = models.CharField(max_length=50)
-    water_dependancy = models.IntegerField()
+    water_dependency = models.IntegerField()
     growing_season = models.CharField(max_length=50)
     optimal_growing_conditions = models.CharField(max_length=100)
     average_growth_time = models.CharField(max_length=25)
