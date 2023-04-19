@@ -24,6 +24,8 @@
                 <div class="btn yellow darken-3 white-text">
                     <a href="{% url 'equipment_update' equipment.id %}">Edit Equipment</a>
                 </div>
+                <div>
+                    <a href="{% url 'equipment_comment_delete' equipment.id c.id %}"><button>DELETE COMMENT</button><a></a></div>
             </div>
         </div>
         <div class="comments">

@@ -62,7 +62,12 @@ def animals_new_comment(request, animal_id):
         new_form.animal_id = animal_id
         new_form.user_id = request.user.id
         new_form.save()
-    return redirect('home')
+    return redirect('animals_detail', animal_id=animal_id)
+
+def AnimalCommentDelete(request, animal_id, comment_id):
+    comment = Comment.objects.get(id=comment_id)
+    comment.delete()
+    return redirect('animals_detail', animal_id=animal_id)
 
 
 # accounts
@@ -153,6 +158,11 @@ def equipment_new_comment(request, equipment_id):
         new_form.equipment_id = equipment_id
         new_form.user_id = request.user.id
         new_form.save()
+    return redirect('equipment_detail', equipment_id=equipment_id)
+
+def EquipmentCommentDelete(request, equipment_id, comment_id):
+    comment = Comment.objects.get(id=comment_id)
+    comment.delete()
     return redirect('equipment_detail', equipment_id=equipment_id)
 
 
