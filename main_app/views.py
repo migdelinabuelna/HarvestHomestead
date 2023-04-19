@@ -145,7 +145,7 @@ class CropsUpdate(PermissionRequiredMixin, UpdateView):
   fields = ['name', 'water_dependancy', 'growing_season', 'optimal_growing_conditions', 'average_growth_time']
   success_url = '/crops/'
 
-
+@login_required
 def crops_new_comment(request, crop_id):
     form = CommentForm(request.POST)
     if form.is_valid():
@@ -201,7 +201,7 @@ class EquipmentUpdate(PermissionRequiredMixin, UpdateView):
 
 # AWS
 
-@permission_required('main_app.add_photo')
+@permission_required('main_app.add_animal_photo')
 def add_animal_photo(request, animal_id):
     photo_file = request.FILES.get('photo_file', None)
     if photo_file:
@@ -215,6 +215,7 @@ def add_animal_photo(request, animal_id):
             print('An error occured uploading file to S3.')
     return redirect('animals_detail', animal_id=animal_id)
 
+@permission_required('main_app.add_crop_photo')
 def add_crop_photo(request, crop_id):
     photo_file = request.FILES.get('photo_file', None)
     if photo_file:
@@ -228,6 +229,7 @@ def add_crop_photo(request, crop_id):
             print('An error occured uploading file to S3.')
     return redirect('crops_detail', crop_id=crop_id)
 
+@permission_required('main_app.add_equipment_photo')
 def add_equipment_photo(request, equipment_id):
     photo_file = request.FILES.get('photo_file', None)
     if photo_file:
