@@ -34,6 +34,8 @@ urlpatterns = [
   
 
   #photo
-  path('animals/<int:animal_id>/add_photo', views.add_photo, name='add_photo'),
+  path('animals/<int:animal_id>/add_photo/', views.add_animal_photo, name='add_animal_photo'),
+  path('crops/<int:crop_id>/add_photo/', views.add_crop_photo, name='add_crop_photo'),
+  path('equipment/<int:equipment_id>/add_photo/', views.add_equipment_photo, name='add_equipment_photo'),
 ]
 
