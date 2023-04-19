@@ -27,6 +27,7 @@ urlpatterns = [
   path('equipment/<int:equipment_id>/', views.equipment_detail, name='equipment_detail'),
   path('equipment/create', views.EquipmentCreate.as_view(), name='equipment_create'),
   path('equipment/<int:pk>/update/', views.EquipmentUpdate.as_view(), name='equipment_update'),
+  path('equipment/<int:equipment_id>/new_comment', views.equipment_new_comment, name='equipment_new_comment'),
 
   
 

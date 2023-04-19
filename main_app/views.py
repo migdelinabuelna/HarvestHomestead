@@ -124,7 +124,17 @@ def equipment_index(request):
 
 def equipment_detail(request, equipment_id):
     equipment = Equipment.objects.get(id=equipment_id)
-    return render(request, 'equipment/detail.html', {'equipment': equipment})
+    comment = equipment.comment_set.all()
+    return render(request, 'equipment/detail.html', {'equipment': equipment, 'comment': comment})
+
+def equipment_new_comment(request, equipment_id):
+    form = CommentForm(request.POST)
+    if form.is_valid():
+        new_form = form.save(commit=False)
+        new_form.equipment_id = equipment_id
+        new_form.user_id = request.user.id
+        new_form.save()
+    return redirect('equipment_detail', equipment_id=equipment_id)
 
 
 class EquipmentCreate(CreateView):
