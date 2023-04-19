@@ -2,16 +2,16 @@
 
 
 {% block content %}
-    <h1>Signup</h1>
+    <h1>Add a farm</h1>
 
     
     {% if error_meesage %}
         <p class="red-text">{{ error_meesage }}</p>        
     {% endif %}
         
-    <form action="{% url 'signup' %}" method="POST">
+    <form action="{% url 'new_farm' user.id %}" method="POST">
         {% csrf_token %}
         {{form.as_p}}
-        <input type="submit" class="btn" value="signup">
+        <input type="submit" class="btn" value="Add farm">
     </form>
 {% endblock content %}

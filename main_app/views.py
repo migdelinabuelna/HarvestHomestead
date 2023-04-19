@@ -3,7 +3,8 @@ from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth import login
 
-from .models import Animal, Photo, Farm, Equipment, Crop, Comment
+from .models import Animal, Photo, Equipment, Crop
+from django.contrib.auth.models import User
 
 from django.contrib.auth.forms import UserCreationForm
 from .forms import RegisterFarmForm, CommentForm
@@ -65,7 +66,9 @@ def animals_new_comment(request, animal_id):
 
 
 # accounts
-
+def user_index(request, user_id):
+    user = User.objects.get(id=user_id)
+    return render(request, 'user/profile.html', {'user': user})
 
 def signup(request):
     error_message = ''
@@ -86,9 +89,10 @@ def new_farm(request, user_id):
     if request.method == 'POST':
         form = RegisterFarmForm(request.POST)
         if form.is_valid():
-            form.user = user_id
-            form = form.save()
-            return redirect('home')
+            new_form = form.save(commit=False)
+            new_form.user_id = user_id
+            new_form = form.save()
+            return redirect('user_index', user_id)
         else:
             error_message = 'Invaild Farm - try again'
     form = RegisterFarmForm()
@@ -162,8 +166,3 @@ def add_photo(request, animal_id):
         except:
             print('An error occured uploading file to S3.')
     return redirect('animals_detail', animal_id=animal_id)
-
-#accounts
-
-def user_index(request, user_id):
-    return render(request, 'user/profile.html')
