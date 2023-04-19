@@ -21,7 +21,7 @@
             </div>
             <div class="col s5">
                 <div class="crop-detail">
-
+                    <div>
                     <p><strong>Crop:</strong> {{ crop.name }}</p>
                     <p><strong>Irrigation Needs:</strong> {{ crop.water_dependency }} inches per year</p>
                     <p><strong>Planting Season:</strong> {{ crop.growing_season }}</p>
@@ -42,7 +42,6 @@
                         </form>
                     </div>
                 </div>
-            </div>
             <div class="col s1 offset-s1">
                 <a href="{% url 'crops_update' crop.id%}">
                     <button>Update Crop</button>
@@ -64,7 +63,8 @@
                         {% if comment %}
                         {% for c in comment %}
                         <p>{{c.comment}}</p>
-                        <p>{{c.user.name}}</p><span>{{c.date}}</span><span>{{c.vote}}</span>
+                        <p>{{c.user.name}}</p><span>{{c.date}}</span><span>{{c.vote}}</span> 
+                        <a href="{% url 'crop_comment_delete' crop.id c.id %}"><button>DELETE COMMENT</button><a>
                         {% endfor %}
 
                         {% else %}

@@ -55,6 +55,9 @@
                     {% for c in comment %}
                     <p>{{c.comment}}</p>
                     <p>{{c.user.name}}</p><span>{{c.date}}</span><span>{{c.vote}}</span>
+                    <div>
+                        <a href="{% url 'animal_comment_delete' animal.id c.id %}"><button>DELETE COMMENT</button></a>
+                    </div>
                     {% endfor %}
                     
                     {% else %}
