@@ -136,13 +136,13 @@ def crops_detail(request, crop_id):
 class CropsCreate(PermissionRequiredMixin, CreateView):
   permission_required = 'main_app.add_crop'
   model = Crop
-  fields = ['name', 'water_dependancy', 'growing_season', 'optimal_growing_conditions', 'average_growth_time']
+  fields = ['name', 'irrigation_needs', 'planting_season', 'hardiness_zone', 'maturity_days']
   success_url = '/crops/'
 
 class CropsUpdate(PermissionRequiredMixin, UpdateView):
   permission_required = 'main_app.change_crop'
   model = Crop
-  fields = ['name', 'water_dependancy', 'growing_season', 'optimal_growing_conditions', 'average_growth_time']
+  fields = ['name', 'irrigation_needs', 'planting_season', 'hardiness_zone', 'maturity_days']
   success_url = '/crops/'
 
 
