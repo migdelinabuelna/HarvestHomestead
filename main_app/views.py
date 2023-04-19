@@ -179,7 +179,7 @@ class EquipmentUpdate(PermissionRequiredMixin, UpdateView):
 # AWS
 
 @permission_required('main_app.add_photo')
-def add_photo(request, animal_id):
+def add_animal_photo(request, animal_id):
     photo_file = request.FILES.get('photo_file', None)
     if photo_file:
         s3 = boto3.client('s3')
