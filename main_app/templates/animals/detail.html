@@ -25,6 +25,9 @@
                     <p><strong>Breed:</strong>{{animal.breed}}</p>
                     <p><strong>Living Conditions:</strong>{{animal.preferred_living_conditions}}</p>
                 </div>
+                <div class="btn yellow darken-3 white-text">
+                    <a href="{% url 'animals_update' animal.id %}">Edit Animal</a>
+                </div>
             </div>
         </div>
         

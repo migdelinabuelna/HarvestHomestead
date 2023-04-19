@@ -21,6 +21,9 @@
                     <p><strong>Fuel Type:</strong>{{ equipment.fuel_type }}</p>
                     <p><strong>Engine Info:</strong>{{ equipment.engine_information }}</p>
                 </div>
+                <div class="btn yellow darken-3 white-text">
+                    <a href="{% url 'equipment_update' equipment.id %}">Edit Equipment</a>
+                </div>
             </div>
         </div>
         <div class="comments">
