@@ -107,7 +107,8 @@ def crops_index(request):
 
 def crops_detail(request, crop_id):
   crop = Crop.objects.get(id=crop_id)
-  return render(request, 'crops/detail.html', {'crop': crop})
+  comment = crop.comment_set.all()
+  return render(request, 'crops/detail.html', {'crop': crop, 'comment': comment})
 
 class CropsCreate(CreateView):
   model = Crop
@@ -118,6 +119,16 @@ class CropsUpdate(UpdateView):
   model = Crop
   fields = ['name', 'water_dependancy', 'growing_season', 'optimal_growing_conditions', 'average_growth_time']
   success_url = '/crops/'
+
+
+def crops_new_comment(request, crop_id):
+    form = CommentForm(request.POST)
+    if form.is_valid():
+        new_form = form.save(commit=False)
+        new_form.crop_id = crop_id
+        new_form.user_id = request.user.id
+        new_form.save()
+    return redirect('crops_detail', crop_id=crop_id)
 
 
 # equipment resource

@@ -20,7 +20,9 @@ urlpatterns = [
   path('crops/', views.crops_index, name='crops_index'),
   path('crops/<int:crop_id>/', views.crops_detail, name='crops_detail'),
   path('crops/create', views.CropsCreate.as_view(), name='crops_create'),
+  #we  need to implement delete.
   path('crops/<int:pk>/update/', views.CropsUpdate.as_view(), name='crops_update'),
+  path('crops/<int:crop_id>/new_comment', views.crops_new_comment, name='crops_new_comment'),
 
   #equipment/crops
   path('equipment/', views.equipment_index, name='equipment_index'),
