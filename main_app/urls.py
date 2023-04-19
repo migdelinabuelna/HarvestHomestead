@@ -8,7 +8,7 @@ urlpatterns = [
   path('animals/<int:animal_id>/', views.animals_detail, name='animals_detail'),
   path('animals/create', views.AnimalCreate.as_view(), name='animals_create'),
   path('animals/<int:pk>/update/', views.AnimalUpdate.as_view(), name='animals_update'),
-  path('animals/<int:pk>/update/', views.AnimalDelete.as_view(), name='animals_delete'),
+  path('animals/<int:pk>/delete/', views.AnimalDelete.as_view(), name='animals_delete'),
   path('animals/<int:animal_id>/new_comment', views.animals_new_comment, name='animals_new_comment'),
 
   #accounts
@@ -23,6 +23,7 @@ urlpatterns = [
   #we  need to implement delete.
   path('crops/<int:pk>/update/', views.CropsUpdate.as_view(), name='crops_update'),
   path('crops/<int:crop_id>/new_comment', views.crops_new_comment, name='crops_new_comment'),
+  path('crops/<int:crop_id>/<int:comment_id>/delete/', views.CropCommentDelete, name='crop_comment_delete'),
 
   #equipment/crops
   path('equipment/', views.equipment_index, name='equipment_index'),

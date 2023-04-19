@@ -23,7 +23,8 @@
                         {% if comment %}
                         {% for c in comment %}
                         <p>{{c.comment}}</p>
-                        <p>{{c.user.name}}</p><span>{{c.date}}</span><span>{{c.vote}}</span>
+                        <p>{{c.user.name}}</p><span>{{c.date}}</span><span>{{c.vote}}</span> 
+                        <a href="{% url 'crop_comment_delete' crop.id c.id %}"><button>DELETE COMMENT</button><a>
                         {% endfor %}
 
                         {% else %}
@@ -42,6 +43,7 @@
                             {% csrf_token %}
                             <textarea name="comment" id="comment" cols="30" rows="10"></textarea>
                             <input type="submit" value="ADD COMMENT">
+                            
                         </form>
                     </div>
                 </div>

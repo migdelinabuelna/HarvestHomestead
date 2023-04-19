@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth import login
 
-from .models import Animal, Photo, Equipment, Crop
+from .models import Animal, Photo, Equipment, Crop, Comment
 from django.contrib.auth.models import User
 
 from django.contrib.auth.forms import UserCreationForm
@@ -130,6 +130,10 @@ def crops_new_comment(request, crop_id):
         new_form.save()
     return redirect('crops_detail', crop_id=crop_id)
 
+def CropCommentDelete(request, crop_id, comment_id):
+    comment = Comment.objects.get(id=comment_id)
+    comment.delete()
+    return redirect('crops_detail', crop_id=crop_id)
 
 # equipment resource
 
@@ -161,7 +165,6 @@ class EquipmentUpdate(UpdateView):
   model = Equipment
   fields = ['make', 'model', 'hydraulic_rating', 'year', 'color', 'description', 'fuel_type', 'engine_information']
   success_url = '/equipment/'
-
 
 # AWS
 
