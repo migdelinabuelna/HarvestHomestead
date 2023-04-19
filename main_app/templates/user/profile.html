@@ -9,25 +9,53 @@
 {% block content %}
     <body>
         <h1>User Profile</h1>
-        <p>{{user.username}}</p>
-        
-        {% if user.animal_set.all %}
-            
-            {% for a in user.animal_set.all  %}
-                <p>{{a.name}} - {{a.breed}}</p>
-            {% endfor %}
-                
-        {% else %}
-            <p>No animals yet</p>
+        <div class="row">
+            <div class="col s3 amber lighten-1">
+                    <p>Username: {{user.username}}</p>
+                    {% if user.farm %}
+                    <p>{{user.farm.farm_name}}</p>
+                    {% else %}
+                    <p>No farm yet</p>
+                    <a href="{% url 'new_farm' user.id%}"><button>Add a farm</button></a>
         {% endif %}
-            
-        
-        {% if user.farm %}
-            <p>{{user.farm.farm_name}}</p>
-        {% else %}
-            <p>No farm yet</p>
-            <a href="{% url 'new_farm' user.id%}"><button>Add a farm</button></a>
-        {% endif %}
+                       
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s2 offset-s3 grey lighten-2">
+                {% if user.animal_set.all %}
+                    
+                    {% for a in user.animal_set.all  %}
+                        <p>{{a.name}} - {{a.breed}}</p>
+                    {% endfor %}
+                        
+                {% else %}
+                    <p>No animals yet</p>
+                {% endif %}
+            </div> 
+            <div class="col s2 offset-s1 grey lighten-2">
+                {% if user.crop_set.all %}
+                    
+                    {% for c in user.crop_set.all  %}
+                        <p>{{c.name}}</p>
+                    {% endfor %}
+                        
+                {% else %}
+                    <p>No crops yet</p>
+                {% endif %}
+            </div> 
+            <div class="col s2 offset-s1 grey lighten-2">
+                {% if user.equipment_set.all %}
+                    
+                    {% for e in user.equipment_set.all  %}
+                        <p>{{e.make}} - {{e.model}}</p>
+                    {% endfor %}
+                        
+                {% else %}
+                    <p>No equipment yet</p>
+                {% endif %}
+            </div> 
+        </div>
                         
     </body>
 {% endblock content %}

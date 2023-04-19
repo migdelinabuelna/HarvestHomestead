@@ -115,7 +115,8 @@ def crops_index(request):
 
 def crops_detail(request, crop_id):
   crop = Crop.objects.get(id=crop_id)
-  return render(request, 'crops/detail.html', {'crop': crop})
+  comment = crop.comment_set.all()
+  return render(request, 'crops/detail.html', {'crop': crop, 'comment': comment})
 
 class CropsCreate(PermissionRequiredMixin, CreateView):
   permission_required = 'main_app.add_crop'
@@ -128,6 +129,16 @@ class CropsUpdate(PermissionRequiredMixin, UpdateView):
   model = Crop
   fields = ['name', 'water_dependancy', 'growing_season', 'optimal_growing_conditions', 'average_growth_time']
   success_url = '/crops/'
+
+
+def crops_new_comment(request, crop_id):
+    form = CommentForm(request.POST)
+    if form.is_valid():
+        new_form = form.save(commit=False)
+        new_form.crop_id = crop_id
+        new_form.user_id = request.user.id
+        new_form.save()
+    return redirect('crops_detail', crop_id=crop_id)
 
 
 # equipment resource
@@ -172,7 +183,7 @@ def add_photo(request, animal_id):
     photo_file = request.FILES.get('photo_file', None)
     if photo_file:
         s3 = boto3.client('s3')
-        key = 'harvest-homestead/' + uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+        key = 'harvest-homestead/animal' + uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
         try:
             s3.upload_fileobj(photo_file, BUCKET, key)
             url = f'{S3_BASE_URL}{BUCKET}/{key}'
@@ -180,4 +191,30 @@ def add_photo(request, animal_id):
         except:
             print('An error occured uploading file to S3.')
     return redirect('animals_detail', animal_id=animal_id)
+
+def add_crop_photo(request, crop_id):
+    photo_file = request.FILES.get('photo_file', None)
+    if photo_file:
+        s3 = boto3.client('s3')
+        key = 'harvest-homestead/crops/' + uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+        try:
+            s3.upload_fileobj(photo_file, BUCKET, key)
+            url = f'{S3_BASE_URL}{BUCKET}/{key}'
+            Photo.objects.create(url=url, crop_id=crop_id)
+        except:
+            print('An error occured uploading file to S3.')
+    return redirect('crops_detail', crop_id=crop_id)
+
+def add_equipment_photo(request, equipment_id):
+    photo_file = request.FILES.get('photo_file', None)
+    if photo_file:
+        s3 = boto3.client('s3')
+        key = 'harvest-homestead/equipment/' + uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+        try:
+            s3.upload_fileobj(photo_file, BUCKET, key)
+            url = f'{S3_BASE_URL}{BUCKET}/{key}'
+            Photo.objects.create(url=url, equipment_id=equipment_id)
+        except:
+            print('An error occured uploading file to S3.')
+    return redirect('equipment_detail', equipment_id=equipment_id)
 

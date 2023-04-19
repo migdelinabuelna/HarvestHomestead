@@ -11,6 +11,13 @@
     <div class="details-page">
         <div class="row">
             <div class="col s5">
+                <div class="photo">
+                    
+                    {% for photo in equipment.photo_set.all %}
+                    <img src="{{photo.url}}" alt="No Photo available" height="500" width="600">
+                    {% endfor %}
+                        
+                </div>
                 <div class="equipment-detail">
                     <p><strong>Make:</strong>{{ equipment.make }}</p>
                     <p><strong>Model:</strong>{{ equipment.model }}</p>
@@ -23,6 +30,26 @@
                 </div>
             </div>
         </div>
+
+        {% if user.is_authenticated and perms.main_app.add_photo %}
+
+        <div class="col s1 offset-s2">
+            <form action="{% url 'add_equipment_photo' equipment.id %}" enctype="multipart/form-data" method="POST">
+                {% csrf_token %}
+                <input type="file" name="photo_file">
+                <br><br>
+                <input type="submit" class="upload-photo" value="Upload Photo">
+            </form>
+        </div>
+        <div class="col s1 offset-s1">
+            <a href="{% url 'equipment_update' equipment.id%}">
+                <button>Update Equipment</button>
+            </a>
+        </div>
+        <div class="col s6 offset-s3">
+        {% else %}
+        <div class="col s6 offset-s6">
+        {% endif %}
         <div class="comments">
                     
             {% if comment %}
