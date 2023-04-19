@@ -13,6 +13,11 @@ LIVESTOCK
     <a href="{% url 'animals_detail' a.id %}">
       <div class="col s6">
         <div class="card">
+          {% for p in a.photo_set.all %}
+          <div class="card-image">
+            <img src="{{p.url}}">
+          </div>
+          {% endfor %}
           <div class="card-content">
             <p>Animal: {{ a.name }}</p>
             <p>Breed: {{ a.breed }}</p>

@@ -18,6 +18,11 @@
     <a href="{% url 'crops_detail' c.id %}">
       <div class="col s6">
         <div class="card">
+          {% for p in c.photo_set.all %}
+          <div class="card-image">
+            <img src="{{p.url}}">
+          </div>
+          {% endfor %}
           <div class="card-content">
             <p>Crop: {{ c.name }}</p>
             <p>Irrigation Needs: {{ c.water_dependency }} inches per year</p>

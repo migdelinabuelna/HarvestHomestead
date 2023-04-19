@@ -13,6 +13,11 @@
         <a href="{% url 'equipment_detail' e.id %}">
           <div class="col s6">
             <div class="card">
+              {% for p in e.photo_set.all %}
+              <div class="card-image">
+                <img src="{{p.url}}">
+              </div>
+              {% endfor %}
               <div class="card-content">
                 <p>Make: {{ e.make }}</p>
                 <p>Model: {{ e.model }}</p>

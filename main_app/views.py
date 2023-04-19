@@ -4,10 +4,9 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.mixins import PermissionRequiredMixin
-
+from django.contrib.auth.models import Group
 from .models import Animal, Photo, Equipment, Crop
 from django.contrib.auth.models import User
-
 from django.contrib.auth.forms import UserCreationForm
 from .forms import RegisterFarmForm, CommentForm
 import uuid
@@ -69,9 +68,14 @@ def animals_new_comment(request, animal_id):
         new_form.save()
     return redirect('home')
 
+def add_animal_farm(request, user_id, animal_id):
+    animal = Animal.objects.get(id=animal_id)
+    animal.user_id = user_id
+    animal.save()
+    return redirect('animals_detail', animal_id=animal_id)
 
 # accounts
-@permission_required('main_app.view_profile')
+@permission_required('main_app.view_farm')
 def user_index(request, user_id):
     user = User.objects.get(id=user_id)
     return render(request, 'user/profile.html', {'user': user})
@@ -80,9 +84,13 @@ def signup(request):
     error_message = ''
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
+        group = Group.objects.get(name='user')
         if form.is_valid():
             user = form.save()
-            login(request, user)
+            user_group_add = User.objects.get(username=user.username)
+            user_group_add.groups.add(group)
+            user_group_add.save()
+            login(request, user_group_add)
             return redirect('home')
         else:
             error_message = 'Invaild sign up - try again'
