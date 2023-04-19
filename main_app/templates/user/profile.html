@@ -9,5 +9,25 @@
 {% block content %}
     <body>
         <h1>User Profile</h1>
+        <p>{{user.username}}</p>
+        
+        {% if user.animal_set.all %}
+            
+            {% for a in user.animal_set.all  %}
+                <p>{{a.name}} - {{a.breed}}</p>
+            {% endfor %}
+                
+        {% else %}
+            <p>No animals yet</p>
+        {% endif %}
+            
+        
+        {% if user.farm %}
+            <p>{{user.farm.farm_name}}</p>
+        {% else %}
+            <p>No farm yet</p>
+            <a href="{% url 'new_farm' user.id%}"><button>Add a farm</button></a>
+        {% endif %}
+                        
     </body>
 {% endblock content %}
