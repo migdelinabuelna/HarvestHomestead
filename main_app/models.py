@@ -13,20 +13,13 @@ class Farm(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     farm_name = models.CharField(max_length=100)
     address = models.CharField(max_length=100, blank=True)
-
-class Photo(models.Model):
-    url = models.CharField(max_length=200)
-    animal = models.ForeignKey(Animal, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return f'Photo for animal_id {self.animal_id} @{self.url}'
     
 class Crop(models.Model):
     name = models.CharField(max_length=50)
-    water_dependency = models.IntegerField()
-    growing_season = models.CharField(max_length=50)
-    optimal_growing_conditions = models.CharField(max_length=100)
-    average_growth_time = models.CharField(max_length=25)
+    irrigation_needs = models.IntegerField()
+    planting_season = models.CharField(max_length=50)
+    hardiness_zone = models.CharField(max_length=100)
+    maturity_days = models.IntegerField()
     user = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
 
 FUEL_TYPE = (
@@ -58,3 +51,12 @@ class Comment(models.Model):
     comment = models.CharField(max_length = 150)
     date = models.DateField(auto_now=True)
     vote = models.IntegerField(default=0)
+
+class Photo(models.Model):
+    url = models.CharField(max_length=200)
+    animal = models.ForeignKey(Animal, on_delete=models.SET_NULL, blank=True, null=True)
+    crop = models.ForeignKey(Crop, on_delete=models.SET_NULL, blank=True, null=True)
+    equipment = models.ForeignKey(Equipment, on_delete=models.SET_NULL, blank=True, null=True)
+
+    def __str__(self):
+        return f'Photo for animal_id {self.animal_id} @{self.url}'
