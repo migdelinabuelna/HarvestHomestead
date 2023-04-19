@@ -7,7 +7,7 @@ class Animal(models.Model):
     name = models.CharField(max_length=50)
     breed = models.CharField(max_length=50)
     preferred_living_conditions = models.CharField(max_length=50)
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
+    user = models.ManyToManyField(User)
 
 class Farm(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -20,7 +20,7 @@ class Crop(models.Model):
     planting_season = models.CharField(max_length=50)
     hardiness_zone = models.CharField(max_length=100)
     maturity_days = models.IntegerField()
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
+    user = models.ManyToManyField(User)
 
 FUEL_TYPE = (
     ('G', 'Gasoline'),
@@ -38,7 +38,7 @@ class Equipment(models.Model):
     description = models.TextField(max_length=250)
     fuel_type = models.CharField(max_length=1, choices=FUEL_TYPE, default=FUEL_TYPE[0][0])
     engine_information = models.CharField(max_length=100)
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
+    user = models.ManyToManyField(User)
 
     def __str__(self):
         return f'{self.get_fuel_type_display}'

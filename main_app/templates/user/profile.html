@@ -23,9 +23,9 @@
         </div>
         <div class="row">
             <div class="col s2 offset-s3 grey lighten-2">
-                {% if user.animal_set.all %}
+                {% if animal %}
                     
-                    {% for a in user.animal_set.all  %}
+                    {% for a in animal  %}
                         <p>{{a.name}} - {{a.breed}}</p>
                     {% endfor %}
                         
