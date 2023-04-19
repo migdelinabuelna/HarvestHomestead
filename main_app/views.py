@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.mixins import PermissionRequiredMixin
 
 from .models import Animal, Photo, Equipment, Crop
 from django.contrib.auth.models import User
@@ -38,23 +40,26 @@ def animals_detail(request, animal_id):
     comment = animal.comment_set.all()
     return render(request, 'animals/detail.html', {'animal': animal, 'photo': photo, 'comment': comment})
 
-
-class AnimalCreate(CreateView):
+class AnimalCreate(PermissionRequiredMixin, CreateView):
+    permission_required = 'main_app.add_animal'
     model = Animal
     fields = ['name', 'breed', 'preferred_living_conditions']
     success_url = '/animals/'
 
 
-class AnimalUpdate(UpdateView):
+class AnimalUpdate(PermissionRequiredMixin, UpdateView):
+    permission_required = 'main_app.change_animal'
     model = Animal
     fields = ['name', 'breed', 'preferred_living_conditions']
     success_url = '/animals/'
 
 
-class AnimalDelete(DeleteView):
+class AnimalDelete(PermissionRequiredMixin, DeleteView):
+    permission_required = 'main_app.delete_animal'
     model = Animal
     success_url = '/animals/'
 
+@login_required
 def animals_new_comment(request, animal_id):
     form = CommentForm(request.POST)
     if form.is_valid():
@@ -66,6 +71,7 @@ def animals_new_comment(request, animal_id):
 
 
 # accounts
+@permission_required('main_app.view_profile')
 def user_index(request, user_id):
     user = User.objects.get(id=user_id)
     return render(request, 'user/profile.html', {'user': user})
@@ -84,6 +90,8 @@ def signup(request):
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
 
+@login_required
+@permission_required('main_app.add_farm')
 def new_farm(request, user_id):
     error_message = ''
     if request.method == 'POST':
@@ -109,12 +117,14 @@ def crops_detail(request, crop_id):
   crop = Crop.objects.get(id=crop_id)
   return render(request, 'crops/detail.html', {'crop': crop})
 
-class CropsCreate(CreateView):
+class CropsCreate(PermissionRequiredMixin, CreateView):
+  permission_required = 'main_app.add_crop'
   model = Crop
   fields = ['name', 'water_dependancy', 'growing_season', 'optimal_growing_conditions', 'average_growth_time']
   success_url = '/crops/'
 
-class CropsUpdate(UpdateView):
+class CropsUpdate(PermissionRequiredMixin, UpdateView):
+  permission_required = 'main_app.change_crop'
   model = Crop
   fields = ['name', 'water_dependancy', 'growing_season', 'optimal_growing_conditions', 'average_growth_time']
   success_url = '/crops/'
@@ -131,6 +141,7 @@ def equipment_detail(request, equipment_id):
     comment = equipment.comment_set.all()
     return render(request, 'equipment/detail.html', {'equipment': equipment, 'comment': comment})
 
+@login_required
 def equipment_new_comment(request, equipment_id):
     form = CommentForm(request.POST)
     if form.is_valid():
@@ -141,12 +152,14 @@ def equipment_new_comment(request, equipment_id):
     return redirect('equipment_detail', equipment_id=equipment_id)
 
 
-class EquipmentCreate(CreateView):
+class EquipmentCreate(PermissionRequiredMixin, CreateView):
+  permission_required = 'main_app.add_equipment'
   model = Equipment
   fields = ['make', 'model', 'hydraulic_rating', 'year', 'color', 'description', 'fuel_type', 'engine_information']
   success_url = '/equipment/'
 
-class EquipmentUpdate(UpdateView):
+class EquipmentUpdate(PermissionRequiredMixin, UpdateView):
+  permission_required = 'main_app.change_equipment'
   model = Equipment
   fields = ['make', 'model', 'hydraulic_rating', 'year', 'color', 'description', 'fuel_type', 'engine_information']
   success_url = '/equipment/'
@@ -154,6 +167,7 @@ class EquipmentUpdate(UpdateView):
 
 # AWS
 
+@permission_required('main_app.add_photo')
 def add_photo(request, animal_id):
     photo_file = request.FILES.get('photo_file', None)
     if photo_file:
@@ -166,3 +180,4 @@ def add_photo(request, animal_id):
         except:
             print('An error occured uploading file to S3.')
     return redirect('animals_detail', animal_id=animal_id)
+
