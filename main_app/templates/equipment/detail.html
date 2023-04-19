@@ -30,7 +30,6 @@
                 </div>
             </div>
         </div>
-
         {% if user.is_authenticated and perms.main_app.add_photo %}
 
         <div class="col s1 offset-s2">
@@ -56,6 +55,9 @@
             {% for c in comment %}
             <p>{{c.comment}}</p>
             <p>{{c.user.name}}</p><span>{{c.date}}</span><span>{{c.vote}}</span>
+            <div class="btn yellow darken-3 white-text">
+                <a href="{% url 'equipment_comment_delete' equipment.id c.id %}"><button>DELETE COMMENT</button><a></a></div>
+            </div>
             {% endfor %}
             
             {% else %}

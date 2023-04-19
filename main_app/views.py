@@ -5,7 +5,9 @@ from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.auth.models import Group
-from .models import Animal, Photo, Equipment, Crop
+
+from .models import Animal, Photo, Equipment, Crop, Comment
+
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from .forms import RegisterFarmForm, CommentForm
@@ -66,7 +68,12 @@ def animals_new_comment(request, animal_id):
         new_form.animal_id = animal_id
         new_form.user_id = request.user.id
         new_form.save()
-    return redirect('home')
+    return redirect('animals_detail', animal_id=animal_id)
+
+def AnimalCommentDelete(request, animal_id, comment_id):
+    comment = Comment.objects.get(id=comment_id)
+    comment.delete()
+    return redirect('animals_detail', animal_id=animal_id)
 
 def add_animal_farm(request, user_id, animal_id):
     animal = Animal.objects.get(id=animal_id)
@@ -148,6 +155,10 @@ def crops_new_comment(request, crop_id):
         new_form.save()
     return redirect('crops_detail', crop_id=crop_id)
 
+def CropCommentDelete(request, crop_id, comment_id):
+    comment = Comment.objects.get(id=comment_id)
+    comment.delete()
+    return redirect('crops_detail', crop_id=crop_id)
 
 # equipment resource
 
@@ -170,6 +181,11 @@ def equipment_new_comment(request, equipment_id):
         new_form.save()
     return redirect('equipment_detail', equipment_id=equipment_id)
 
+def EquipmentCommentDelete(request, equipment_id, comment_id):
+    comment = Comment.objects.get(id=comment_id)
+    comment.delete()
+    return redirect('equipment_detail', equipment_id=equipment_id)
+
 
 class EquipmentCreate(PermissionRequiredMixin, CreateView):
   permission_required = 'main_app.add_equipment'
@@ -182,7 +198,6 @@ class EquipmentUpdate(PermissionRequiredMixin, UpdateView):
   model = Equipment
   fields = ['make', 'model', 'hydraulic_rating', 'year', 'color', 'description', 'fuel_type', 'engine_information']
   success_url = '/equipment/'
-
 
 # AWS
 
