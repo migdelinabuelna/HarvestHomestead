@@ -25,9 +25,6 @@
                     <p><strong>Breed:</strong>{{animal.breed}}</p>
                     <p><strong>Living Conditions:</strong>{{animal.preferred_living_conditions}}</p>
                 </div>
-                <div class="btn yellow darken-3 white-text">
-                    <a href="{% url 'animals_update' animal.id %}">Edit Animal</a>
-                </div>
             </div>
         </div>
         
@@ -35,7 +32,7 @@
             
         <div class="row">
             <div class="col s1 offset-s2">
-                <form action="{% url 'add_photo' animal.id %}" enctype="multipart/form-data" method="POST">
+                <form action="{% url 'add_animal_photo' animal.id %}" enctype="multipart/form-data" method="POST">
                     {% csrf_token %}
                     <input type="file" name="photo_file">
                     <br><br>
