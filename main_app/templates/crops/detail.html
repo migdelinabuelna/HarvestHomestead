@@ -12,11 +12,38 @@
         <div class="row">
             <div class="col s6">
                 <div class="crop-detail">
+
                     <p><strong>Crop:</strong> {{ crop.name }}</p>
                     <p><strong>Irrigation Needs:</strong> {{ crop.water_dependency }} inches per year</p>
                     <p><strong>Planting Season:</strong> {{ crop.growing_season }}</p>
                     <p><strong>Hardiness Zone:</strong> {{ crop.optimal_growing_conditions}}</p>
                     <p><strong>Maturity Days:</strong> {{ crop.average_growth_time}}</p>
+                    <div class="comments">
+
+                        {% if comment %}
+                        {% for c in comment %}
+                        <p>{{c.comment}}</p>
+                        <p>{{c.user.name}}</p><span>{{c.date}}</span><span>{{c.vote}}</span>
+                        {% endfor %}
+
+                        {% else %}
+                            <p> No comments yet.</p>
+
+                            {% if user %}
+                            {% else %}
+                                <span> Sign in to leave a comment.</span>
+                            {% endif %}
+
+                        {% endif %}
+
+                    </div>
+                    <div class="comment">
+                        <form action="{% url 'crops_new_comment' crop.id%}" method="POST">
+                            {% csrf_token %}
+                            <textarea name="comment" id="comment" cols="30" rows="10"></textarea>
+                            <input type="submit" value="ADD COMMENT">
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
