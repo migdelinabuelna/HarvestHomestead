@@ -76,16 +76,15 @@ def AnimalCommentDelete(request, animal_id, comment_id):
     return redirect('animals_detail', animal_id=animal_id)
 
 def add_animal_farm(request, user_id, animal_id):
-    animal = Animal.objects.get(id=animal_id)
-    animal.user_id = user_id
-    animal.save()
+    Animal.objects.get(id=animal_id).user.add(user_id)
     return redirect('animals_detail', animal_id=animal_id)
 
 # accounts
 @permission_required('main_app.view_farm')
 def user_index(request, user_id):
     user = User.objects.get(id=user_id)
-    return render(request, 'user/profile.html', {'user': user})
+    animal = Animal.objects.filter(user=user_id)
+    return render(request, 'user/profile.html', {'user': user, 'animal': animal})
 
 def signup(request):
     error_message = ''
