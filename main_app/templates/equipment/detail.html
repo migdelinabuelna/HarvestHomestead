@@ -10,7 +10,7 @@
 <body>
     <div class="details-page">
         <div class="row">
-            <div class="col s5">
+            <div class="col s4 offset-s2">
                 <div class="photo">
                     
                     {% for photo in equipment.photo_set.all %}
@@ -21,22 +21,22 @@
             </div>
             <div class="col s5">
                 <div class="equipment-detail">
-                <div>
                     <p><strong>Make:</strong>{{ equipment.make }}</p>
                     <p><strong>Model:</strong>{{ equipment.model }}</p>
                     <p><strong>Hydraulics:</strong>{{ equipment.hydraulic_rating }}</p>
                     <p><strong>Year:</strong>{{ equipment.year }}</p>
                     <p><strong>Color:</strong>{{ equipment.color }}</p>
                     <p><strong>Description:</strong>{{ equipment.description }}</p>
-                    <p><strong>Fuel Type:</strong>{{ equipment.fuel_type }}</p>
                     <p><strong>Engine Info:</strong>{{ equipment.engine_information }}</p>
+                    {% if user.is_authenticated %}
                     <a href="{% url 'add_equipment_farm' equipment.id user.id %}"><button>Add to farm</button></a>
+                    {% endif %}
                 </div>
             </div>
         </div>
         <div class="row">
             {% if user.is_authenticated and perms.main_app.add_photo %}
-            <div class="col s1 offset-s2">
+            <div class="col s2 offset-s1">
                 <form action="{% url 'add_equipment_photo' equipment.id %}" enctype="multipart/form-data" method="POST">
                 {% csrf_token %}
                 <input type="file" name="photo_file">
@@ -44,45 +44,59 @@
                 <input type="submit" class="upload-photo" value="Upload Photo">
                 </form>
             </div>
-        </div>
-        <div class="col s1 offset-s1">
+        <div class="col s2">
             <a href="{% url 'equipment_update' equipment.id%}">
                 <button>Update Equipment</button>
             </a>
         </div>
-        <div class="col s6 offset-s3">
-        {% else %}
-        <div class="col s6 offset-s6">
-        {% endif %}
-        <div class="comment">
-            <form action="{% url 'equipment_new_comment' equipment.id%}" method="POST">
-                {% csrf_token %}
-                <textarea name="comment" id="comment" cols="30" rows="10"></textarea>
-                <input type="submit" value="ADD COMMENT">
-            </form>
-        </div>
-        <div class="comments">
-                    
-            {% if comment %}
-            {% for c in comment %}
-            <p>{{c.comment}}</p>
-            <p>{{c.user.name}}</p><span>{{c.date}}</span><span>{{c.vote}}</span>
-                <a href="{% url 'equipment_comment_delete' equipment.id c.id %}"><button>DELETE COMMENT</button><a></a>
-            {% endfor %}
-            
-            {% else %}
-                <p>No comments yet.</p>
-                
-                {% if user %}
-                {% else %}
-                    <span> Sign in to leave a comment.</span>
-                {% endif %}
-                    
             {% endif %}
+
+            {% if perms.main_app.add_photo %}
+                <div class="col s6 offset-s1">
+                {% else %}
+                <div class="col s6 offset-s7">
+            {% endif %}
+
+            <div class="col s6 offset-s1">
+                <div class="comments">
+                    
+                    {% if comment %}
+                    {% for c in comment %}
+                    <p>{{c.comment}}</p>
+                    <p>{{c.user.name}}</p><span>{{c.date}}</span>
+                    <div>
+                        <a href="{% url 'equipment_comment_delete' equipment.id c.id %}"><button>DELETE COMMENT</button><a></a>
+                    </div>
+                    {% endfor %}
+                    
+                    {% else %}
+                        <p>No comments yet.</p>
+                        
+                        {% if user %}
+                        {% else %}
+                            <span> Sign in to leave a comment.</span>
+                        {% endif %}
+                            
+                    {% endif %}
+                </div>
+            </div>
         </div>
-        </div>   
+        
+        {% if user.is_authenticated %}
+            
+        <div class="row">
+            <div class="col s6 offset-s6"> 
+                <div class="comment">
+                    <form action="{% url 'equipment_new_comment' equipment.id%}" method="POST">
+                        {% csrf_token %}
+                        <textarea name="comment" id="comment" cols="10" rows="5"></textarea>
+                        <input type="submit" value="ADD COMMENT">
+                    </form>
+                </div>
+            </div>
         </div>
-        </div>
+        {% endif %}
     </div>
 </body>   
 {% endblock content %}
+        
