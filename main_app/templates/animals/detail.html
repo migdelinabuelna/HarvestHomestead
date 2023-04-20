@@ -24,15 +24,17 @@
                     <p><strong>Name:</strong>{{animal.name}}</p>
                     <p><strong>Breed:</strong>{{animal.breed}}</p>
                     <p><strong>Living Conditions:</strong>{{animal.preferred_living_conditions}}</p>
-                    <a href="{% url 'add_animal_farm' animal.id user.id %}"><button>Add to farm</button></a>
+                    
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'add_animal_farm' animal.id user.id %}"><button>Add to farm</button></a>
+                    {% endif %} 
                 </div>
             </div>
         </div>
-        
+        <div class="row">
         {% if user.is_authenticated and perms.main_app.add_photo %}
             
-        <div class="row">
-            <div class="col s1 offset-s2">
+            <div class="col s2 offset-s1">
                 <form action="{% url 'add_animal_photo' animal.id %}" enctype="multipart/form-data" method="POST">
                     {% csrf_token %}
                     <input type="file" name="photo_file">
@@ -40,22 +42,26 @@
                     <input type="submit" class="upload-photo" value="Upload Photo">
                 </form>
             </div>
-            <div class="col s1 offset-s1">
+            <div class="col s2">
                 <a href="{% url 'animals_update' animal.id%}">
                     <button>Update Animal</button>
                 </a>
             </div>
-            <div class="col s6 offset-s3">
-            {% else %}
-            <div class="col s6 offset-s6">
-            {% endif %}
+                {% endif %}
                 
+                {% if perms.main_app.add_photo %}
+                    <div class="col s6 offset-s1">
+                    
+                        {% else %}
+                    <div class="col s6 offset-s7">
+                {% endif %}
+                    
                 <div class="comments">
                     
                     {% if comment %}
                     {% for c in comment %}
                     <p>{{c.comment}}</p>
-                    <p>{{c.user.name}}</p><span>{{c.date}}</span><span>{{c.vote}}</span>
+                    <p>{{c.user.name}}</p><span>{{c.date}}</span>
                     <div>
                         <a href="{% url 'animal_comment_delete' animal.id c.id %}"><button>DELETE COMMENT</button></a>
                     </div>
@@ -70,8 +76,14 @@
                         {% endif %}
                             
                     {% endif %}
-                        
                 </div>
+            </div>
+        </div>
+        
+        {% if user.is_authenticated %}
+            
+        <div class="row">
+            <div class="col s6 offset-s6"> 
                 <div class="comment">
                     <form action="{% url 'animals_new_comment' animal.id%}" method="POST">
                         {% csrf_token %}
@@ -81,6 +93,7 @@
                 </div>
             </div>
         </div>
+        {% endif %}
     </div>
 </body>   
 {% endblock content %}
