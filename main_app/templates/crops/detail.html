@@ -27,6 +27,7 @@
                     <p><strong>Planting Season:</strong> {{ crop.planting_season }}</p>
                     <p><strong>Hardiness Zone:</strong> {{ crop.hardiness_zone}}</p>
                     <p><strong>Maturity Days:</strong> {{ crop.maturity_days}}</p>
+                    <a href="{% url 'add_crop_farm' crop.id user.id %}"><button>Add to farm</button></a>
                 </div>
             </div>
         </div>     

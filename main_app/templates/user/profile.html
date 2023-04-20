@@ -34,9 +34,9 @@
                 {% endif %}
             </div> 
             <div class="col s2 offset-s1 grey lighten-2">
-                {% if user.crop_set.all %}
+                {% if crop %}
                     
-                    {% for c in user.crop_set.all  %}
+                    {% for c in crop  %}
                         <p>{{c.name}}</p>
                     {% endfor %}
                         
@@ -45,9 +45,9 @@
                 {% endif %}
             </div> 
             <div class="col s2 offset-s1 grey lighten-2">
-                {% if user.equipment_set.all %}
+                {% if equipment %}
                     
-                    {% for e in user.equipment_set.all  %}
+                    {% for e in equipment  %}
                         <p>{{e.make}} - {{e.model}}</p>
                     {% endfor %}
                         

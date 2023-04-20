@@ -28,6 +28,7 @@ urlpatterns = [
   path('crops/<int:pk>/update/', views.CropsUpdate.as_view(), name='crops_update'),
   path('crops/<int:crop_id>/new_comment', views.crops_new_comment, name='crops_new_comment'),
   path('crops/<int:crop_id>/<int:comment_id>/delete/', views.CropCommentDelete, name='crop_comment_delete'),
+  path('crops/<int:crop_id>/add_to_farm/<int:user_id>', views.add_crop_farm, name='add_crop_farm'),
 
   #equipment/crops
   path('equipment/', views.equipment_index, name='equipment_index'),
@@ -36,6 +37,7 @@ urlpatterns = [
   path('equipment/<int:pk>/update/', views.EquipmentUpdate.as_view(), name='equipment_update'),
   path('equipment/<int:equipment_id>/new_comment', views.equipment_new_comment, name='equipment_new_comment'),
   path('equipment/<int:equipment_id>/<int:comment_id>/delete/', views.EquipmentCommentDelete, name='equipment_comment_delete'),
+  path('crops/<int:equipment_id>/add_to_farm/<int:user_id>', views.add_equipment_farm, name='add_equipment_farm'),
   
 
   #photo
