@@ -111,7 +111,6 @@ def signup(request):
     return render(request, 'registration/signup.html', context)
 
 @login_required
-@permission_required('main_app.add_farm')
 def new_farm(request, user_id):
     error_message = ''
     if request.method == 'POST':
