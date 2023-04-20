@@ -27,14 +27,17 @@
                     <p><strong>Planting Season:</strong> {{ crop.planting_season }}</p>
                     <p><strong>Hardiness Zone:</strong> {{ crop.hardiness_zone}}</p>
                     <p><strong>Maturity Days:</strong> {{ crop.maturity_days}}</p>
+                    {% if user.is_authenticated %}
                     <a href="{% url 'add_crop_farm' crop.id user.id %}"><button>Add to farm</button></a>
+                    {% endif %}
+                    </div>
                 </div>
-            </div>
-        </div>     
+            </div> 
+        </div>   
         <div class="row">
             {% if user.is_authenticated and perms.main_app.add_photo %}
                     
-                    <div class="col s1 offset-s2">
+                    <div class="col s2 offset-s1">
                         <form action="{% url 'add_crop_photo' crop.id %}" enctype="multipart/form-data" method="POST">
                             {% csrf_token %}
                             <input type="file" name="photo_file">
@@ -42,29 +45,24 @@
                             <input type="submit" class="upload-photo" value="Upload Photo">
                         </form>
                     </div>
-                </div>
-            <div class="col s1 offset-s1">
+            <div class="col s2">
                 <a href="{% url 'crops_update' crop.id%}">
                     <button>Update Crop</button>
                 </a>
             </div>
-                <div class="col s6 offset-s3">
-                {% else %}
-                <div class="col s6 offset-s6">
                 {% endif %}
-                    <div class="comment">
-                        <form action="{% url 'crops_new_comment' crop.id%}" method="POST">
-                            {% csrf_token %}
-                            <textarea name="comment" id="comment" cols="30" rows="10"></textarea>
-                            <input type="submit" value="ADD COMMENT">
-                        </form>
-                    </div>
+                {% if perms.main_app.add_photo %}
+                    <div class="col s6 offset-s1">
+                    
+                        {% else %}
+                    <div class="col s6 offset-s7">
+                {% endif %}
                     <div class="comments">
 
                         {% if comment %}
                         {% for c in comment %}
                         <p>{{c.comment}}</p>
-                        <p>{{c.user.name}}</p><span>{{c.date}}</span><span>{{c.vote}}</span> 
+                        <p>{{c.user.name}}</p><span>{{c.date}}</span> 
                         <a href="{% url 'crop_comment_delete' crop.id c.id %}"><button>DELETE COMMENT</button><a>
                         {% endfor %}
 
@@ -77,7 +75,23 @@
                             {% endif %}
 
                         {% endif %}
-
+                    </div>
+                </div>
+            </div>
+                        {% if user.is_authenticated %}
+                        <div class="row">
+                            <div class="col s6 offset-s6"> 
+                        <div class="comment">
+                            <form action="{% url 'crops_new_comment' crop.id%}" method="POST">
+                                {% csrf_token %}
+                                <textarea name="comment" id="comment" cols="30" rows="10"></textarea>
+                                <input type="submit" value="ADD COMMENT">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                        {% endif %}
+                            
                     </div>
                 </div>
             </div>

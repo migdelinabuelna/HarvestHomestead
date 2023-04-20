@@ -38,7 +38,7 @@
           <li><a href="{% url 'animals_index' %}">LIVESTOCK</a></li>
           <li><a href="{% url 'crops_index' %}">CROPS</a></li>
           <li><a href="{% url 'equipment_index' %}"> EQUIPMENT </a></li>
-          {% if user.is_authenticated %}
+          {% if user.is_authenticated and perms.main_app.add_photo %}
           <a class='dropdown-trigger btn white-text black' href='#' data-target='dropdown1'>ADD!</a>
           <ul id='dropdown1' class='dropdown-content'>
               <li><a class="black-text" href="{% url 'animals_create' %}">ADD ANIMAL</a></li>
