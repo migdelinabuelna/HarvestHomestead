@@ -1,6 +1,6 @@
 # HARVEST HOMESTEAD
 
-Our farming resource app provides admin users with the ability to add animals with photos, relevant information, and necessary food requirements. Additionally, it allows users to create crops by providing essential details on their growth, along with the required equipment for planting, working, and harvesting. We have designed the app to allow admin users to perform these functions from the application site rather than the admin section, ensuring that users can enjoy the full range of application features.
+Our farming resource app provides admin users with the ability to add animals, crops, and equipment with photos and relevant information. We have designed the app to allow admin users to perform these functions from the application site rather than just the admin section, ensuring that users can enjoy the full range of application features.
 
 While the general public can access our page and information, they can only participate in the community by creating a personal account. With a personal account, users can create their own profiles and add their farm names as well as any animals they currently own or intend to acquire.
 
@@ -13,7 +13,7 @@ Inline-style:
 ![alt text](Inline-style: https://imgur.com/gallery/TNi719a)
 
 ## TECHNOLOGIES USED
-PYTHON, DJANGO, AWS(AMAZON WEB SERVICES)S3, MATERIALIZE, 
+PYTHON, DJANGO, AWS(AMAZON WEB SERVICES)S3, MATERIALIZE, JavaScript (in conjunction with materialize)
 
 
 ## Getting Started: That Includes:
