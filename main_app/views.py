@@ -79,6 +79,10 @@ def add_animal_farm(request, user_id, animal_id):
     Animal.objects.get(id=animal_id).user.add(user_id)
     return redirect('animals_detail', animal_id=animal_id)
 
+def remove_animal_farm(request, animal_id, user_id):
+    Animal.objects.get(id=animal_id).user.remove(user_id)
+    return redirect('user_index', user_id=user_id)
+
 # accounts
 @permission_required('main_app.view_farm')
 def user_index(request, user_id):
@@ -165,6 +169,10 @@ def add_crop_farm(request, user_id, crop_id):
     Crop.objects.get(id=crop_id).user.add(user_id)
     return redirect('crops_detail', crop_id=crop_id)
 
+def remove_crop_farm(request, crop_id, user_id):
+    Crop.objects.get(id=crop_id).user.remove(user_id)
+    return redirect('user_index', user_id=user_id)
+
 # equipment resource
 
 def equipment_index(request):
@@ -207,6 +215,10 @@ class EquipmentUpdate(PermissionRequiredMixin, UpdateView):
 def add_equipment_farm(request, user_id, equipment_id):
     Equipment.objects.get(id=equipment_id).user.add(user_id)
     return redirect('equipment_detail', equipment_id=equipment_id)
+
+def remove_equipment_farm(request, equipment_id, user_id):
+    Equipment.objects.get(id=equipment_id).user.remove(user_id)
+    return redirect('user_index', user_id=user_id)
 
 # AWS
 
