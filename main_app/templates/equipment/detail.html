@@ -30,6 +30,7 @@
                     <p><strong>Description:</strong>{{ equipment.description }}</p>
                     <p><strong>Fuel Type:</strong>{{ equipment.fuel_type }}</p>
                     <p><strong>Engine Info:</strong>{{ equipment.engine_information }}</p>
+                    <a href="{% url 'add_equipment_farm' equipment.id user.id %}"><button>Add to farm</button></a>
                 </div>
             </div>
         </div>

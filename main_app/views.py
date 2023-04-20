@@ -84,7 +84,9 @@ def add_animal_farm(request, user_id, animal_id):
 def user_index(request, user_id):
     user = User.objects.get(id=user_id)
     animal = Animal.objects.filter(user=user_id)
-    return render(request, 'user/profile.html', {'user': user, 'animal': animal})
+    crop = Crop.objects.filter(user=user_id)
+    equipment = Equipment.objects.filter(user=user_id)
+    return render(request, 'user/profile.html', {'user': user, 'animal': animal, 'crop': crop, 'equipment':equipment})
 
 def signup(request):
     error_message = ''
@@ -159,6 +161,10 @@ def CropCommentDelete(request, crop_id, comment_id):
     comment.delete()
     return redirect('crops_detail', crop_id=crop_id)
 
+def add_crop_farm(request, user_id, crop_id):
+    Crop.objects.get(id=crop_id).user.add(user_id)
+    return redirect('crops_detail', crop_id=crop_id)
+
 # equipment resource
 
 def equipment_index(request):
@@ -197,6 +203,10 @@ class EquipmentUpdate(PermissionRequiredMixin, UpdateView):
   model = Equipment
   fields = ['make', 'model', 'hydraulic_rating', 'year', 'color', 'description', 'fuel_type', 'engine_information']
   success_url = '/equipment/'
+
+def add_equipment_farm(request, user_id, equipment_id):
+    Equipment.objects.get(id=equipment_id).user.add(user_id)
+    return redirect('equipment_detail', equipment_id=equipment_id)
 
 # AWS
 
