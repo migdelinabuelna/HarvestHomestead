@@ -202,13 +202,13 @@ def EquipmentCommentDelete(request, equipment_id, comment_id):
 class EquipmentCreate(PermissionRequiredMixin, CreateView):
   permission_required = 'main_app.add_equipment'
   model = Equipment
-  fields = ['make', 'model', 'hydraulic_rating', 'year', 'color', 'description', 'fuel_type', 'engine_information']
+  fields = ['make', 'model', 'hydraulic_rating', 'year', 'color', 'description', 'engine_information']
   success_url = '/equipment/'
 
 class EquipmentUpdate(PermissionRequiredMixin, UpdateView):
   permission_required = 'main_app.change_equipment'
   model = Equipment
-  fields = ['make', 'model', 'hydraulic_rating', 'year', 'color', 'description', 'fuel_type', 'engine_information']
+  fields = ['make', 'model', 'hydraulic_rating', 'year', 'color', 'description', 'engine_information']
   success_url = '/equipment/'
 
 def add_equipment_farm(request, user_id, equipment_id):
