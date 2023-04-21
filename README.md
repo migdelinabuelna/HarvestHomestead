@@ -15,6 +15,9 @@ The app also features a comment section for each element in our resources. Users
 
 ![Crops Page](https://imgur.com/gallery/DkOPyHb)
 
+![Crop Detail Page](https://imgur.com/gallery/AabBpFw)
+
+
 ## TECHNOLOGIES USED
 PYTHON, DJANGO, AWS(AMAZON WEB SERVICES)S3, MATERIALIZE, JavaScript (in conjunction with materialize)
 
