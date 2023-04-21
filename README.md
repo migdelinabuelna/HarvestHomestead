@@ -1,8 +1,8 @@
 # HARVEST HOMESTEAD
 
-Our farming resource app provides admin users with the ability to add animals, crops, and equipment with photos and relevant information. We have designed the app to allow admin users to perform these functions from the application site rather than just the admin section, ensuring that users can enjoy the full range of application features.
+Our farming resource app provides admin users with the ability to add animals, crops, and equipment with photos and relevant information. We have designed the app to allow admin users to perform these functions from the application site rather than just the admin section, ensuring that admin users can enjoy the full range of application features.
 
-While the general public can access our page and information, they can only participate in the community by creating a personal account. With a personal account, users can create their own profiles and add their farm names as well as any animals they currently own or intend to acquire.
+While the general public can access our page and information, they can only participate in the community by creating a personal account. By signing up, users can create their own profiles and add their farm names as well as any animals they currently own or intend to acquire.
 
 The app also features a comment section for each element in our resources. Users can create new suggestion comments under their username and delete any comments that belong to them.
 
@@ -11,10 +11,13 @@ The app also features a comment section for each element in our resources. Users
 ## HOME PAGE 
 ![Home Page](https://imgur.com/gallery/TNi719a)
 
+## LIVESTOCK PAGE
 ![Livestock Page](https://imgur.com/gallery/M7ACyKu)
 
+## CROPS PAGE
 ![Crops Page](https://imgur.com/gallery/DkOPyHb)
 
+## CROPS DETAIL PAGE
 ![Crop Detail Page](https://imgur.com/gallery/AabBpFw)
 
 
@@ -30,8 +33,9 @@ PYTHON, DJANGO, AWS(AMAZON WEB SERVICES)S3, MATERIALIZE, JavaScript (in conjunct
 
 
 ## Next Steps: 
-We would like to edit comments, like them 
-allow admin to delete created items, and edit images in all resources
+-edit and like comments 
+-allow admin users to delete created items and edit images in all resources
+-adjust elements in detail pages to a fixed position using CSS
 
 
 
