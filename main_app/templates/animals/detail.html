@@ -23,7 +23,7 @@
                 <div class="animal-detail">
                     <p><strong>Name:</strong>{{animal.name}}</p>
                     <p><strong>Breed:</strong>{{animal.breed}}</p>
-                    <p><strong>Living Conditions:</strong>{{animal.preferred_living_conditions}}</p>
+                    <p><strong>Feed:</strong>{{animal.preferred_living_conditions}}</p>
                     
                     {% if user.is_authenticated %}
                         <a href="{% url 'add_animal_farm' animal.id user.id %}"><button>Add to farm</button></a>

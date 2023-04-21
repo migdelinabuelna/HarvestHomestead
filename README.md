@@ -8,9 +8,12 @@ The app also features a comment section for each element in our resources. Users
 
 <a href="https://harvest-homestead.fly.dev/">CHECKOUT OUR DEPLOYED APP</a>
 
-## HOME PAGE
-Inline-style: 
-![alt text](Inline-style: https://imgur.com/gallery/TNi719a)
+## HOME PAGE 
+![Home Page](https://imgur.com/gallery/TNi719a)
+
+![Livestock Page](https://imgur.com/gallery/M7ACyKu)
+
+![Crops Page](https://imgur.com/gallery/DkOPyHb)
 
 ## TECHNOLOGIES USED
 PYTHON, DJANGO, AWS(AMAZON WEB SERVICES)S3, MATERIALIZE, JavaScript (in conjunction with materialize)
@@ -25,6 +28,7 @@ PYTHON, DJANGO, AWS(AMAZON WEB SERVICES)S3, MATERIALIZE, JavaScript (in conjunct
 
 ## Next Steps: 
 We would like to edit comments, like them 
-allow admin to delete created items 
+allow admin to delete created items, and edit images in all resources
+
 
 
