@@ -9,16 +9,16 @@ The app also features a comment section for each element in our resources. Users
 <a href="https://harvest-homestead.fly.dev/">CHECKOUT OUR DEPLOYED APP</a>
 
 ## HOME PAGE 
-![Home Page](https://imgur.com/gallery/TNi719a)
+![Home Page](https://i.imgur.com/bYyoZFt.png)
 
 ## LIVESTOCK PAGE
-![Livestock Page](https://imgur.com/gallery/M7ACyKu)
+![Livestock Page](https://i.imgur.com/8RJrkic.png)
 
 ## CROPS PAGE
-![Crops Page](https://imgur.com/gallery/DkOPyHb)
+![Crops Page](https://i.imgur.com/ZLFtHyM.png)
 
 ## CROPS DETAIL PAGE
-![Crop Detail Page](https://imgur.com/gallery/AabBpFw)
+![Crop Detail Page](https://i.imgur.com/c3Abf3l.png)
 
 
 ## TECHNOLOGIES USED
